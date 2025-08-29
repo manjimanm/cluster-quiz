@@ -1,0 +1,1245 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin-schedule exam </title>
+    <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <!-- Meta -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="description" content="CodedThemes">
+      <meta name="keywords" content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+      <meta name="author" content="CodedThemes">
+      <!-- Favicon icon -->
+      <link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon">
+      <!-- Google font-->
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+      <!-- Required Fremwork -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap/css/bootstrap.min.css' %}">
+      <!-- themify-icons line icon -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/themify-icons/themify-icons.css' %}">
+      <!-- ico font -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/icofont/css/icofont.css' %}">
+      <!-- Style.css -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/jquery.mCustomScrollbar.css' %}">
+
+
+
+
+
+<!-- Include Select2 CSS (for styling) -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- Include jQuery (necessary for Select2 to work) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include Select2 JS (for functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+     
+<!-- <style>
+    .mt-100{margin-top: 100px}
+    body{background: #00B4DB;
+        background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+    background: linear-gradient(to right, #0083B0, #00B4DB);
+    color: #514B64;min-height: 100vh}
+</style> -->
+
+
+  </head>
+
+  <body>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+
+            <nav class="navbar header-navbar pcoded-header">
+                <div class="navbar-wrapper">
+
+                    <div class="navbar-logo">
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="ti-menu"></i>
+                        </a>
+                        <a class="mobile-search morphsearch-search" href="#">
+                            <i class="ti-search"></i>
+                        </a>
+                        <a href="{% url 'index' %}">
+                            <!-- <img class="img-fluid" src="{% static 'assets/images/logo.png' %}" alt="Theme-Logo" /> -->
+                             <h2>ADMIN</h2>
+                        </a>
+                        <a class="mobile-options">
+                            <i class="ti-more"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-left">
+                            <li>
+                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                            </li>
+
+                            <li>
+                                <a href="#!" onclick="javascript:toggleFullScreen()">
+                                    <i class="ti-fullscreen"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav-right">
+                            <!-- <li class="header-notification">
+                                <a href="#!">
+                                    <i class="ti-bell"></i>
+                                    <span class="badge bg-c-pink"></span>
+                                </a>
+                                <ul class="show-notification">
+                                    <li>
+                                        <h6>Notifications</h6>
+                                        <label class="label label-danger">New</label>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">John Doe</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center img-radius" src="{% static 'assets/images/avatar-3.jpg' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">Joseph William</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">Sara Soudein</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li> -->
+                            <li class="user-profile header-notification">
+                                <a href="#!">
+                                    <!-- <img src="{% static 'assets/images/avatar-4.jpg' %}" class="img-radius" alt="User-Profile-Image"> -->
+                                    <img src="https://cdn-icons-png.flaticon.com/128/149/149071.png" class="img-radius" alt="User-Profile-Image">
+                                    <span>Account</span>
+                                    <i class="ti-angle-down"></i>
+                                </a>
+                                <ul class="show-notification profile-notification">
+                                    <!-- <li>
+                                        <a href="#!">
+                                            <i class="ti-settings"></i> Settings
+                                        </a>
+                                    </li> -->
+                                    <li>
+                                        <a href="{% url 'profile' %}">
+                                            <i class="ti-user"></i> Profile
+                                        </a>
+                                    </li>
+                                    <!-- <li>
+                                        <a href="#">
+                                            <i class="ti-email"></i> My Messages
+                                        </a>
+                                    </li> -->
+                                    <!-- <li>
+                                        <a href="#">
+                                            <i class="ti-lock"></i> Lock Screen
+                                        </a>
+                                    </li> -->
+                                    <li>
+                                        <a href="{% url 'adminlogout' %}">
+                                            <i class="ti-layout-sidebar-left"></i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                    <nav class="pcoded-navbar">
+                        <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+                        <div class="pcoded-inner-navbar main-menu">
+                            <div class="">
+                                <div class="main-menu-header">
+                                    <!-- <img class="img-40 img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="User-Profile-Image"> -->
+                                    <img src="https://cdn-icons-png.flaticon.com/128/149/149071.png" class="img-radius" style="height: 60px;" alt="User-Profile-Image">
+                                    <div class="user-details">
+                                        <span>Account</span>
+                                        <span id="more-details">Admin<i class="ti-angle-down"></i></span>
+                                    </div>
+                                </div>
+
+                                <div class="main-menu-content">
+                                    <ul>
+                                        <li class="more-details">
+                                            <a href="{% url 'profile' %}"><i class="ti-user"></i>View Profile</a>
+                                            <!-- <a href="#!"><i class="ti-settings"></i>Settings</a> -->
+                                            <a href="{% url 'adminlogout' %}"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- <div class="pcoded-search">
+                                <span class="searchbar-toggle">  </span>
+                                <div class="pcoded-search-box ">
+                                    <input type="text" placeholder="Search">
+                                    <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
+                                </div>
+                            </div> -->
+                            <!-- <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div> -->
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="active">
+                                    {% for permission in permissions %}
+                                    <a href="{{ permission.url }}">
+                                        <span class="pcoded-micon"><i class="{{ permission.icon }}"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main" style="text-transform: capitalize;">{{ permission.name }}</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    {% endfor %}
+                                </li>
+                                <!-- <li class="active">
+                                    <a href="{% url 'newcategory' %}">
+                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Category</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manage Question</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class=" ">
+                                            <a href="newquiz">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Question</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="newviewquiz">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Question</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                       
+                                         
+                                        <li class=" ">
+                                            <a href="regist_admin">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Admin</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li> -->
+                                        <!-- <li class=" ">
+                                            <a href="label-badge.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Label Badge</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="tooltip.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Tooltip</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="typography.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Typography</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="notification.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Notification</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="icon-themify.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Icon</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li> -->
+
+                                    </ul>
+                                </li>
+                            </ul>
+                            <!-- <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms"></div> -->
+                            <!-- <ul class="pcoded-item pcoded-left-item">
+                                <li>
+                                    <a href="schedule_exam">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Schedule Exam</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class=" ">
+                                    <a href="register_users">
+                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Register User</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                
+                               <li class=" ">
+                                    <a href="viewregister">
+                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Manage User</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                
+                                
+                            </ul> -->
+
+                            <!-- <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Chart &amp; Maps</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li>
+                                    <a href="chart.html">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Chart</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="map-google.html">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Maps</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Pages</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class=" ">
+                                            <a href="auth-normal-sign-in.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Login</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="auth-sign-up.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Register</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="sample-page.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Sample Page</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                
+                            </ul>
+
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">Other</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="pcoded-hasmenu ">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Menu Levels</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Menu Level 2.1</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="pcoded-hasmenu ">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Menu Level 2.2</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="javascript:void(0)">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Menu Level 2.3</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            </ul> -->
+                        </div>
+                    </nav>
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+                            <div class="main-body">
+                                <div class="page-wrapper">
+
+                                    <div class="page-body">
+                                        <h3>Create Exam</h3>
+                                        {% if messages %}
+                                        <div class="alert alert-success">
+                                            {% for message in messages %}
+                                                <p>{{ message }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                
+                                         <div class="card">
+                                            <form method="POST" action="{% url 'create_exam' %}" >
+                                                {% csrf_token %}
+                                                
+    
+                                                    <!-- <label class="col-sm-2 col-form-label">Select Category:</label>
+                                                    <div class="col-sm-12">
+                                                        <select name="categoryname" class="form-control" id="category-dropdown">
+                                                            <option value="">Select One Value Only</option>
+                                                            {% for category in categories %}
+                                                                <option value="{{ category.id }}">{{ category.category_name }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div> -->
+
+
+
+                                                    <label class="col-sm-3 col-form-label">Select Category:</label><br>
+                                                <div class="col-sm-12">
+                                                    <select name="categoryname" id="category-dropdown" class="selectpicker form-control form-control-normal" data-live-search="true">
+                                                        <option value="">Select Category</option>
+                                                        {% for category in categories %}
+                                                            <option value="{{ category.id }}">{{ category.category_name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+
+                                                   
+
+
+                                                    <!-- <label class="col-sm-2 col-form-label">Select Subcategory</label>
+                                                    <div class="col-sm-12">
+                                                    <select id="subcategory-dropdown" class="form-control" name="subcategory"  placeholder="Select upto 5 tags" >
+                                                        <option value=""></option>
+                                                            
+                                                    </select>
+                                                </div>
+                                                 <br>  -->
+
+                                                 <label class="col-sm-2 col-form-label" >Select Subcategory:</label>
+                                                 <div class="col-sm-12" id="subcategory-checkboxes" style="margin-left: 200px;">
+                                                     <!-- Subcategories will be rendered here as checkboxes -->
+                                                 </div>
+                                        
+                                                 <!-- <label class="col-sm-3 col-form-label">Creating for:</label><br>
+                                                 <div class="col-sm-12">
+                                                     <select name="createdfor" id="createdfor" class="form-control form-control-normal">
+                                                         <option value="">Select Employer</option>
+                                                         {% for user in employer_users %}
+                                                             <option value="{{ user.id }}">{{ user.name }}</option>
+                                                         {% endfor %}
+                                                     </select>
+                                                 </div> -->
+
+
+                                                 <label class="col-sm-3 col-form-label">Creating for:</label><br>
+                                                    <div class="col-sm-12">
+                                                        <select name="createdfor" id="createdfor" class="selectpicker form-control form-control-normal" data-live-search="true">
+                                                            <option value="">Select Employer</option>
+                                                            {% for user in employer_users %}
+                                                                <option value="{{ user.id }}">{{ user.name }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                    
+                                            
+                                              
+                                                 <label class="col-sm-3 col-form-label">Number of Questions to Select:</label><br>
+                                                 <div class="col-sm-12">
+                                                     <input type="number" name="question_count" id="count" min="1" max="30"
+                                                     placeholder="Specify the number of questions to assign to the user." class="form-control form-control-normal">
+                                                 </div><br>
+                                                 
+                                                 <label class="col-sm-3 col-form-label">Time Allowed For The Test:</label><br>
+                                                 <div class="col-sm-12">
+                                                    
+                                                    <input type="text" id="timelimit" name="timelimit" placeholder="Specify the time of test (e.g., '1 hour 30 minutes')" 
+                                                     class="form-control form-control-normal" required>
+                                                     <div id="warning-message" style="color: rgb(20, 1, 1);">
+                                                         <p><strong>Warning:</strong> You can only select up to 60 questions for a 1-hour exam.</p>
+                                                     </div>
+                                                 </div><br>
+
+                                                 <label class="col-sm-3 col-form-label">Percentage to Pass:</label><br>
+                                                 <div class="col-sm-12">
+                                                     <input type="number" name="percentage" id="percentage" min="40" max="100"
+                                                     placeholder="Specify the percaentage to pass the exam." class="form-control form-control-normal">
+                                                 </div><br>
+                                                 
+                                                 <!-- Warning message container -->
+                                                
+                                    
+                                                <button type="submit" class="btn btn-primary btn">Proceed to Select Questions</button>
+                                            </form>
+                                        </div>
+                                        <!-- Tooltips on textbox card end -->
+
+                                        <!-- <div class="row"> -->
+                                            <!-- card1 start -->
+                                            <!-- <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
+                                                        <span class="text-c-blue f-w-600">Use space</span>
+                                                        <h4>49/50GB</h4>
+                                                        <div>
+                                                            <span class="f-left m-t-10 text-muted">
+                                                                <i class="text-c-blue f-16 icofont icofont-warning m-r-10"></i>Get more space
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- card1 end -->
+                                             
+                                            <!-- card1 start -->
+                                            <!-- <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
+                                                        <span class="text-c-pink f-w-600">Revenue</span>
+                                                        <h4>$23,589</h4>
+                                                        <div>
+                                                            <span class="f-left m-t-10 text-muted">
+                                                                <i class="text-c-pink f-16 icofont icofont-calendar m-r-10"></i>Last 24 hours
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- card1 end -->
+                                            <!-- card1 start -->
+                                            <!-- <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="icofont icofont-warning-alt bg-c-green card1-icon"></i>
+                                                        <span class="text-c-green f-w-600">Fixed issue</span>
+                                                        <h4>45</h4>
+                                                        <div>
+                                                            <span class="f-left m-t-10 text-muted">
+                                                                <i class="text-c-green f-16 icofont icofont-tag m-r-10"></i>Tracked via microsoft
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- card1 end -->
+                                            <!-- card1 start -->
+                                            <!-- <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="icofont icofont-social-twitter bg-c-yellow card1-icon"></i>
+                                                        <span class="text-c-yellow f-w-600">Followers</span>
+                                                        <h4>+562</h4>
+                                                        <div>
+                                                            <span class="f-left m-t-10 text-muted">
+                                                                <i class="text-c-yellow f-16 icofont icofont-refresh m-r-10"></i>Just update
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- card1 end -->
+                                            <!-- Statestics Start -->
+                                            <!-- <div class="col-md-12 col-xl-8">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Statestics</h5>
+                                                        <div class="card-header-left ">
+                                                        </div>
+                                                        <div class="card-header-right">
+                                                            <ul class="list-unstyled card-option">
+                                                                <li><i class="icofont icofont-simple-left "></i></li>
+                                                                <li><i class="icofont icofont-maximize full-card"></i></li>
+                                                                <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                                                <li><i class="icofont icofont-refresh reload-card"></i></li>
+                                                                <li><i class="icofont icofont-error close-card"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <div id="statestics-chart" style="height:517px;"></div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+
+
+                                            <!-- <div class="col-md-12 col-xl-4">
+                                                    <div class="card fb-card">
+                                                        <div class="card-header">
+                                                            <i class="icofont icofont-social-facebook"></i>
+                                                            <div class="d-inline-block">
+                                                                <h5>facebook</h5>
+                                                                <span>blog page timeline</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-block text-center">
+                                                            <div class="row">
+                                                                <div class="col-6 b-r-default">
+                                                                    <h2>23</h2>
+                                                                    <p class="text-muted">Active</p>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <h2>23</h2>
+                                                                    <p class="text-muted">Comment</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card dribble-card">
+                                                        <div class="card-header">
+                                                            <i class="icofont icofont-social-dribbble"></i>
+                                                            <div class="d-inline-block">
+                                                                <h5>dribble</h5>
+                                                                <span>Product page analysis</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-block text-center">
+                                                            <div class="row">
+                                                                <div class="col-6 b-r-default">
+                                                                    <h2>23</h2>
+                                                                    <p class="text-muted">Live</p>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <h2>23</h2>
+                                                                    <p class="text-muted">Message</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card twitter-card">
+                                                        <div class="card-header">
+                                                            <i class="icofont icofont-social-twitter"></i>
+                                                            <div class="d-inline-block">
+                                                                <h5>twitter</h5>
+                                                                <span>current new timeline</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-block text-center">
+                                                            <div class="row">
+                                                                <div class="col-6 b-r-default">
+                                                                    <h2>25</h2>
+                                                                    <p class="text-muted">new tweet</p>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <h2>450+</h2>
+                                                                    <p class="text-muted">Follower</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                           
+                                            <!-- Email Sent End -->
+                                            <!-- Data widget start -->
+                                            <!-- <div class="col-md-12 col-xl-6">
+                                                <div class="card project-task">
+                                                    <div class="card-header">
+                                                        <div class="card-header-left ">
+                                                            <h5>Time spent : project &amp; task</h5>
+                                                        </div>
+                                                        <div class="card-header-right">
+                                                            <ul class="list-unstyled card-option">
+                                                                <li><i class="icofont icofont-simple-left "></i></li>
+                                                                <li><i class="icofont icofont-maximize full-card"></i></li>
+                                                                <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                                                <li><i class="icofont icofont-refresh reload-card"></i></li>
+                                                                <li><i class="icofont icofont-error close-card"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block p-b-10">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Project & Task</th>
+                                                                        <th>Time Spents</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="task-contain">
+                                                                                <h6 class="bg-c-blue d-inline-block text-center">U</h6>
+                                                                                <p class="d-inline-block m-l-20">UI Design</p>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="d-inline-block m-r-20">4 : 36</p>
+                                                                            <div class="progress d-inline-block">
+                                                                                <div class="progress-bar bg-c-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:80%">
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="task-contain">
+                                                                                <h6 class="bg-c-pink d-inline-block text-center">R</h6>
+                                                                                <p class="d-inline-block m-l-20">Redesign Android App</p>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="d-inline-block m-r-20">4 : 36</p>
+                                                                            <div class="progress d-inline-block">
+                                                                                <div class="progress-bar bg-c-pink" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:60%">
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="task-contain">
+                                                                                <h6 class="bg-c-yellow d-inline-block text-center">L</h6>
+                                                                                <p class="d-inline-block m-l-20">Logo Design</p>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="d-inline-block m-r-20">4 : 36</p>
+                                                                            <div class="progress d-inline-block">
+                                                                                <div class="progress-bar bg-c-yellow" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="task-contain">
+                                                                                <h6 class="bg-c-green d-inline-block text-center">A</h6>
+                                                                                <p class="d-inline-block m-l-20">Appestia landing Page</p>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="d-inline-block m-r-20">4 : 36</p>
+                                                                            <div class="progress d-inline-block">
+                                                                                <div class="progress-bar bg-c-green" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="task-contain">
+                                                                                <h6 class="bg-c-blue d-inline-block text-center">L</h6>
+                                                                                <p class="d-inline-block m-l-20">Logo Design</p>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="d-inline-block m-r-20">4 : 36</p>
+                                                                            <div class="progress d-inline-block">
+                                                                                <div class="progress-bar bg-c-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="col-md-12 col-xl-6">
+                                                <div class="card add-task-card">
+                                                    <div class="card-header">
+                                                        <div class="card-header-left">
+                                                            <h5>To do list</h5>
+                                                        </div>
+                                                        <div class="card-header-right">
+                                                            <button class="btn btn-card btn-primary">Add task </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <div class="to-do-list">
+                                                            <div class="checkbox-fade fade-in-primary d-block">
+                                                                <label class="check-task d-block">
+                                                                    <input type="checkbox" value="">
+                                                                    <span class="cr">
+                                                                        <i class="cr-icon icofont icofont-ui-check txt-default"></i>
+                                                                    </span>
+                                                                    <span><h6>Schedule Meeting with Compnes <span class="label bg-c-green m-l-10 f-10">2 week</span></h6></span>
+                                                                    <div class="task-card-img m-l-40">
+                                                                        <a href="#!"><img src="{% static 'assets/images/avatar-2.jpg' %}" data-toggle="tooltip" title="Lary Doe" alt="" class="img-40"></a>
+                                                                        <a href="#!"><img src="{% static 'assets/images/avatar-3.jpg' %}" data-toggle="tooltip" title="Alia" alt="" class="img-40 m-l-10"></a>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="to-do-list">
+                                                            <div class="checkbox-fade fade-in-primary d-block">
+                                                                <label class="check-task d-block">
+                                                                    <input type="checkbox" value="">
+                                                                    <span class="cr">
+                                                                        <i class="cr-icon icofont icofont-ui-check txt-default"></i>
+                                                                    </span>
+                                                                    <span><h6>Meeting With HOD's and borad</h6><p class="text-muted m-l-40">23 january 2003</p></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="to-do-list">
+                                                            <div class="checkbox-fade fade-in-primary d-block">
+                                                                <label class="check-task d-block">
+                                                                    <input type="checkbox" value="">
+                                                                    <span class="cr">
+                                                                        <i class="cr-icon icofont icofont-ui-check txt-default"></i>
+                                                                    </span>
+                                                                    <span><h6>Create template, admin with responsive<span class="label bg-c-pink m-l-10">2 week</span></h6></span>
+                                                                    <div class="task-card-img m-l-40">
+                                                                        <a href="#!"><img src="{% static 'assets/images/avatar-2.jpg' %}" data-toggle="tooltip" title="Alia" alt="" class="img-40"></a>
+                                                                        <a href="#!"><img src="{% static 'assets/images/avatar-3.jpg' %}" data-toggle="tooltip" title="Suzen" alt="" class="img-40 m-l-10"></a>
+                                                                        <a href="#!"><img src="{% static 'assets/images/avatar-4.jpg' %}" data-toggle="tooltip" title="Lary Doe" alt="" class="img-40 m-l-10"></a>
+                                                                        <a href="#!"><img src="{% static 'assets/images/avatar-2.jpg' %}" data-toggle="tooltip" title="Josephin Doe" alt="" class="img-40 m-l-10"></a>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="to-do-list">
+                                                            <div class="checkbox-fade fade-in-primary d-block">
+                                                                <label class="check-task d-block">
+                                                                    <input type="checkbox" value="">
+                                                                    <span class="cr">
+                                                                        <i class="cr-icon icofont icofont-ui-check txt-default"></i>
+                                                                    </span>
+                                                                    <span><h6>Meeting With HOD's and borad</h6>
+                                                                        <p class="text-muted m-l-40">23 january 2003</p></span>
+                                                                        <div class="task-card-img m-l-40">
+                                                                            <a href="#!"><img src="{% static 'assets/images/avatar-2.jpg' %}" data-toggle="tooltip" title="Lary Doe" alt="" class="img-40"></a>
+                                                                            <a href="#!"><img src="{% static 'assets/images/avatar-3.jpg' %}" data-toggle="tooltip" title="Alia" alt="" class="img-40 m-l-10"></a>
+                                                                            <a href="#!"><img src="{% static 'assets/images/avatar-2.jpg' %}" data-toggle="tooltip" title="Josephin Doe" alt="" class="img-40 m-l-10"></a>
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                                <!-- Data widget End -->
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="styleSelector">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fixed-button">
+                    <a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank" class="btn btn-md btn-primary">
+                      <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Warning Section Starts -->
+        <!-- Older IE warning message -->
+    <!--[if lt IE 9]>
+<div class="ie-warning">
+    <h1>Warning!!</h1>
+    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+    <div class="iew-container">
+        <ul class="iew-download">
+            <li>
+                <a href="http://www.google.com/chrome/">
+                    <img src="assets/images/browser/chrome.png" alt="Chrome">
+                    <div>Chrome</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/">
+                    <img src="assets/images/browser/firefox.png" alt="Firefox">
+                    <div>Firefox</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.opera.com">
+                    <img src="assets/images/browser/opera.png" alt="Opera">
+                    <div>Opera</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/">
+                    <img src="assets/images/browser/safari.png" alt="Safari">
+                    <div>Safari</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                    <img src="assets/images/browser/ie.png" alt="">
+                    <div>IE (9 & above)</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
+<!-- Warning Section Ends -->
+<!-- Required Jquery -->
+<script type="text/javascript" src="{% static 'assets/js/jquery/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery-ui/jquery-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/popper.js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript" src="{% static 'assets/js/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+<!-- modernizr js -->
+<script type="text/javascript" src="{% static 'assets/js/modernizr/modernizr.js' %}"></script>
+<!-- am chart -->
+<script src="{% static 'assets/pages/widget/amchart/amcharts.min.js' %}"></script>
+<script src="{% static 'assets/pages/widget/amchart/serial.min.js ' %}"></script>
+<!-- Todo js -->
+<script type="text/javascript " src="static/assets/pages/todo/todo.js "></script>
+<!-- Custom js -->
+<script type="text/javascript" src="{% static 'assets/pages/dashboard/custom-dashboard.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/script.js' %}"></script>
+<script type="text/javascript " src="{% static 'assets/js/SmoothScroll.js' %}"></script>
+<script src="{% static 'assets/js/pcoded.min.js' %}"></script>
+<script src="{% static 'assets/js/demo-12.js' %}"></script>
+<script src="{% static 'assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script>
+var $window = $(window);
+var nav = $('.fixed-button');
+    $window.scroll(function(){
+        if ($window.scrollTop() >= 200) {
+         nav.addClass('active');
+     }
+     else {
+         nav.removeClass('active');
+     }
+ });
+</script>
+
+<script>
+   
+    document.querySelector("form").addEventListener("submit", function() {
+        var count = document.getElementById("count").value;
+        document.getElementById("question_count").value = count;
+    });
+</script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+    
+    var multipleCancelButton = new Choices('#subc', {
+       removeItemButton: true,
+       maxItemCount:5,
+       searchResultLimit:5,
+       renderChoiceLimit:5
+     }); 
+    
+    
+});
+</script>
+
+
+<script>
+    $(document).ready(function(){
+        // When category changes, send AJAX request to fetch subcategories
+        $('#category-dropdown').change(function(){
+            var category_id = $(this).val();
+            
+            if (category_id) {
+                $.ajax({
+                    url: '{% url "get_subcategories" %}',  // The URL to the view that handles the AJAX request
+                    data: {
+                        'category_id': category_id  // Send the selected category ID
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        // Clear the current subcategory checkboxes
+                        $('#subcategory-checkboxes').empty();
+
+                        // Loop through the subcategories and add them as checkboxes
+                        $.each(data.subcategories, function(index, subcategory) {
+                            $('#subcategory-checkboxes').append(
+                                '<div class="form-check">' +
+                                    '<input class="form-check-input" type="checkbox" name="subcategories" value="' + subcategory.id + '" id="subcategory-' + subcategory.id + '">' +
+                                    '<label class="form-check-label" for="subcategory-' + subcategory.id + '">' + subcategory.sub_category + '</label>' +
+                                '</div>'
+                            );
+                        });
+                    }
+                });
+            } else {
+                // If no category is selected, clear the subcategory checkboxes
+                $('#subcategory-checkboxes').empty();
+            }
+        });
+    });
+</script>
+
+
+<!-- Place this just before the closing </body> tag -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector("form").addEventListener("submit", function(event) {
+            var category = document.getElementById("category-dropdown").value;
+            var questionCount = document.getElementById("count").value;
+            var createdFor = document.getElementById("createdfor").value;
+            var percentage = document.getElementById("percentage").value;
+            
+           
+            
+            // Check if category is selected
+            if (!category) {
+                alert("Please select a category.");
+                event.preventDefault();  // Prevent form submission
+                return;
+            }
+
+           
+            // Check if question count is provided and within range
+            if (!questionCount || questionCount < 1 || questionCount > 30) {
+                alert("Please specify a valid number of questions (between 1 and 30).");
+                event.preventDefault();  // Prevent form submission
+                return;
+            }
+
+            if (!percentage || percentage < 40 || percentage > 100) {
+                alert("Please specify the percentage to pass (between 40 and 100).");
+                event.preventDefault();  // Prevent form submission
+                return;
+            }
+
+            // Check if 'Created for' field is filled
+            if (!createdFor) {
+                alert("Please specify who the test is created for.");
+                event.preventDefault();  // Prevent form submission
+                return;
+            }
+
+           
+        });
+    });
+
+    
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the form element
+        const form = document.querySelector("form");
+
+        // Add submit event listener to the form
+        form.addEventListener("submit", function(event) {
+            var timeInput = document.getElementById("timelimit").value.trim();  // Get and trim the time input value
+
+            // Regex for matching:
+            // 1. "X hours"
+            // 2. "Y minutes"
+            // 3. "X hours Y minutes"
+            const timeFormatRegex = /^(\d+)\s*hour(s?)\s*(\d+)\s*minute(s?)$/i; // Matches hour(s) and minute(s) together
+            const onlyMinutesRegex = /^(\d+)\s*minute(s?)$/i; // Matches only minutes
+            const onlyHoursRegex = /^(\d+)\s*hour(s?)$/i; // Matches only hours
+
+            // Try matching the input with the regex
+            const matchHoursAndMinutes = timeInput.match(timeFormatRegex);
+            const matchOnlyMinutes = timeInput.match(onlyMinutesRegex);
+            const matchOnlyHours = timeInput.match(onlyHoursRegex);
+
+            let hours = 0;
+            let minutes = 0;
+
+            if (matchHoursAndMinutes) {
+                // Extract hours and minutes from the match
+                hours = parseInt(matchHoursAndMinutes[1], 10);
+                minutes = parseInt(matchHoursAndMinutes[3], 10);
+            } else if (matchOnlyMinutes) {
+                // Extract only minutes from the match
+                minutes = parseInt(matchOnlyMinutes[1], 10);
+            } else if (matchOnlyHours) {
+                // Extract only hours from the match
+                hours = parseInt(matchOnlyHours[1], 10);
+            } else {
+                // If none of the formats match, show an alert
+                alert('Please enter a valid time format (e.g., "1 hour", "30 minutes", or "1 hour 30 minutes").');
+                event.preventDefault();  // Prevent form submission
+                return;  // Stop further execution
+            }
+
+            // If minutes are provided, make sure it's in the correct format (no abbreviations)
+            if ((matchHoursAndMinutes || matchOnlyMinutes) && !timeInput.match(/minute(s?)/i)) {
+                alert('Please type "minute" in full, not "min" or "m".');
+                event.preventDefault();  // Prevent form submission
+                return;  // Stop further execution
+            }
+
+            // Check if the time exceeds the allowed limit (e.g., 4 hours max)
+            if (hours > 4 || (hours === 4 && minutes > 0)) {
+                // If time exceeds 4 hours, show an alert and prevent form submission
+                alert('The maximum allowed time for the exam is 4 hours (e.g., "4 hours" or "240 minutes").');
+                event.preventDefault();  // Prevent form submission
+                return;
+            }
+
+            // If only hours or only minutes are entered, they should also be allowed
+            if ((hours > 0 && minutes === 0) || (minutes > 0 && hours === 0)) {
+                return true; // Valid, submit
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+    document.querySelector("form").addEventListener("submit", function(event) {
+    var subcategoryCheckboxes = document.getElementsByName("subcategories");
+    var subcategoryChecked = false;
+
+    // Loop through checkboxes to check if at least one is checked
+    for (var i = 0; i < subcategoryCheckboxes.length; i++) {
+        if (subcategoryCheckboxes[i].checked) {
+            subcategoryChecked = true;
+            break;
+        }
+    }
+
+    // If no checkbox is checked, show an alert and prevent form submission
+    if (!subcategoryChecked) {
+        alert("Please select at least one subcategory.");
+        event.preventDefault();  // Prevent form submission
+        return;
+    }
+});
+
+</script>
+
+<!-- Include Bootstrap Select CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+
+<!-- Include Bootstrap Select JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function() {
+        // Initialize Bootstrap Select for the "Created for" dropdown
+        $('#createdfor').selectpicker();
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        // Initialize Bootstrap Select for the "Category" dropdown
+        $('#category-dropdown').selectpicker();
+    });
+</script>
+
+
+
+</body>
+
+</html>

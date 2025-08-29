@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <style>
+        /* Include the same CSS from questionare.html */
+        :root {
+            --primary: #88b3de;
+            --secondary: #dcd8e2;
+            --accent: #e6e1e8;
+            --text: #171715;
+            --bg: #e6edf0;
+            --red: #913030;
+            --shadow: rgba(0, 0, 0, 0.4);
+            --default-padding: 15px;
+            --default-border-radius: 10px;
+            --default-font-size: 1rem;
+            --title-font-size: 1.5rem;
+            --default-hover-opacity: 0.7;
+            --default-transition-time: 0.15s;
+        }
+
+        * {
+            font-family: Poppins, "Verdana", sans-serif;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            background-image: linear-gradient(to top right, var(--bg), var(--primary));
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: var(--primary);
+            border-radius: var(--default-border-radius);
+            padding: var(--default-padding);
+            box-shadow: 5px 5px 5px var(--shadow);
+        }
+
+        .question-card {
+            background-color: var(--accent);
+            border-radius: var(--default-border-radius);
+            margin: 10px 0;
+            padding: var(--default-padding);
+            box-shadow: 3px 3px 3px var(--shadow);
+        }
+
+        .correct {
+            border: 6px solid #28a745; /* Green */
+        }
+
+        .incorrect {
+            border: 6px solid #dc3545; /* Red */
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+
+        /* Pass/Fail Styling */
+        .result-status {
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .passed {
+            color: #28a745;
+        }
+
+        .failed {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Score: {{ score }}</h1>
+        <h2>Attempt Summary</h2>
+
+        <!-- Display Pass/Fail Status -->
+        <div class="result-status">
+            {% if pass_fail_status == "Passed" %}
+                <p class="passed">
+                    You passed with {{ correct_percentage|floatformat:2 }}% correct answers.
+                </p>
+            {% else %}
+                <p class="failed">
+                    You failed with {{ correct_percentage|floatformat:2 }}% correct answers.
+                </p>
+            {% endif %}
+        </div>
+
+        <div>
+            {% for result in attempt_results %}
+                <div class="question-card {% if result.user_ans == result.question.answer %}correct{% else %}incorrect{% endif %}">
+                    <h3>{{ forloop.counter }}.{{ result.question.question }}</h3>
+                    <p><strong>Your Answer:</strong> {{ result.user_ans }}</p>
+                    <p><strong>Correct Answer:</strong> {{ result.question.answer }}</p>
+                    <p><strong>Options:</strong></p>
+                    <ul>
+                        <li>{{ result.question.option1 }}</li>
+                        <li>{{ result.question.option2 }}</li>
+                        <li>{{ result.question.option3 }}</li>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{% url 'home' %}">Take another quiz</a>
+        </div>
+    </div>
+</body>
+</html>

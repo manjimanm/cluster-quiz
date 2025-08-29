@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Import Font Awesome for the eye icon -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"> -->
+
+   
+
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(12, 12, 12, 0.15);
+        }
+
+        .container .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .container .title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        .content form .user-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px 0 12px 0;
+        }
+
+        form .user-details .input-box {
+            margin-bottom: 15px;
+            width: calc(100% / 2 - 20px);
+            position: relative;
+        }
+
+        form .input-box span.details {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .user-details .input-box input,
+        .user-details .input-box select {
+            height: 45px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 15px;
+            border: 1px solid #ccc;
+            border-bottom-width: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .user-details .input-box input:focus,
+        .user-details .input-box select:focus,
+        .user-details .input-box input:valid,
+        .user-details .input-box select:valid {
+            border-color: #9b59b6;
+        }
+
+        form .button {
+            height: 45px;
+            margin: 35px 0;
+        }
+
+        form .button input {
+            height: 100%;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        form .button input:hover {
+            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+        }
+
+        
+        .input-box input {
+            padding-right: 35px;
+        }
+
+        .toggle-password {
+          
+            position: absolute;
+            right: 10px;
+            top: 70%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            color: #141212;
+        }
+
+       
+        .toggle-password:hover {
+            color: #9b59b6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if messages %}
+        <div id="messages">
+            {% for message in messages %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+        <div class="title">Register Now</div>
+        <div class="content">
+            
+            <form action="{% url 'newregister' %}" method="POST"  onsubmit="return validateForm();">
+                {% csrf_token %}
+                <div class="user-details">
+                   
+                    <div class="input-box">
+                        <span class="details">Full Name</span>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" >
+                    </div>
+
+                   
+                    <div class="input-box" style="height:0px;">
+                        <span class="details">Category</span>
+                        <select id="category" name="category">
+                            <option value="" disabled selected>Select a category</option>
+                            {% for cat in categories %}
+                                <option value="{{ cat.id }}">{{ cat.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    
+
+
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input type="text" id="email" name="email" placeholder="Enter your email">
+                        <span id="email-error" style="color: red; display: none;">This email is already taken.</span>
+                    </div>
+
+
+                    <div class="input-box">
+                        <span class="details">Phone Number</span>
+                        <input type="text" id="phone" name="phone" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number.">
+                    </div>
+
+                    
+                    <div class="input-box">
+                        <span class="details">Password</span>
+                        <input type="password" name="password" id="password" placeholder="Enter your password">
+                        <span id="toggle-password-text" class="toggle-password" onclick="togglePasswordVisibility('password')">show</span>
+                    </div>
+
+                   
+                    <div class="input-box">
+                        <span class="details">Confirm Password</span>
+                        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password" >
+                        <span id="toggle-confirm-password-text" class="toggle-password" onclick="togglePasswordVisibility('confirm_password')">show</span>
+                    </div>
+                </div>
+
+                
+                <div class="button">
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+     $(document).ready(function() {
+    $("#email").on('input', function() {
+        var email = $(this).val();
+
+        if (email) {
+            $.ajax({
+                url: "{% url 'check_email' %}", 
+                type: "GET",
+                data: { email: email }, 
+                success: function(response) {
+                    if (response.exists) {
+                        $("#email-error").show();  
+                    } else {
+                        $("#email-error").hide(); 
+                    }
+                },
+                error: function(xhr, errmsg, err) {
+                    console.log("Error: " + errmsg);
+                }
+            });
+        } else {
+            $("#email-error").hide();  
+        }
+    });
+
+    
+    $("form").submit(function(event) {
+        if ($("#email-error").is(":visible")) {
+            event.preventDefault();  
+            alert("Please fix the email error before submitting.");
+        }
+    });
+});
+
+    </script>
+
+    <script>
+       
+       function togglePasswordVisibility(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const toggleText = document.getElementById(`toggle-${fieldId}-text`); // The text span element
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";  // Change password field to text to show password
+                toggleText.textContent = "hide";  // Change text to "Hide"
+            } else {
+                passwordField.type = "password";  // Change password field back to password
+                toggleText.textContent = "show";  // Change text to "Show"
+            }
+        }
+
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const category = document.getElementById('category').value;
+            const password = document.getElementById("password").value;
+
+            if (name.trim() === "") {
+                alert("Name is required.");
+                return false;
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            const phonePattern = /^[0-9]{10}$/; 
+            if (!phonePattern.test(phone)) {
+                alert("Please enter a valid phone number (10 digits).");
+                return false;
+            }
+
+            if (category === "") {
+                alert("Please select a category.");
+                return false;
+            }
+
+            const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{6,}$/;
+            if (!passwordPattern.test(password)) {
+                alert("Password must be at least 6 characters long, include alphabets, one number, and at least one special character.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+    <script>
+        
+        function validatePasswordMatch() {
+            
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+    
+            
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return false; 
+            }
+    
+            return true; 
+        }
+    
+       
+        document.querySelector('form').addEventListener('submit', function(event) {
+            if (!validatePasswordMatch()) {
+                event.preventDefault(); 
+            }
+        });
+    </script>
+    
+
+    
+    
+    
+    
+</body>
+</html>

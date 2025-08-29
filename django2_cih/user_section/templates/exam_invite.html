@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Import Font Awesome for the eye icon -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"> -->
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(12, 12, 12, 0.15);
+        }
+
+        .container .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .container .title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        .content form .user-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px 0 12px 0;
+        }
+
+        form .user-details .input-box {
+            margin-bottom: 15px;
+            width: calc(100% / 2 - 20px);
+            position: relative;
+        }
+
+        form .input-box span.details {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .user-details .input-box input,
+        .user-details .input-box select {
+            height: 45px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 15px;
+            border: 1px solid #ccc;
+            border-bottom-width: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .user-details .input-box input:focus,
+        .user-details .input-box select:focus,
+        .user-details .input-box input:valid,
+        .user-details .input-box select:valid {
+            border-color: #9b59b6;
+        }
+
+        form .button {
+            height: 45px;
+            margin: 35px 0;
+            display: flex;               /* Use Flexbox to display buttons in a row */
+    gap: 10px;                   /* Add space between buttons */
+    justify-content: center;     /* Optionally, center the buttons */
+    align-items: center; 
+        }
+
+        form .button input {
+            height: 100%;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            padding: 10px 20px;          /* Add some padding to buttons */
+                      /* Adjust font size for buttons */
+
+        }
+
+        form .button input:hover {
+            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+        }
+
+        
+        .input-box input {
+            padding-right: 35px;
+        }
+
+        .button input {
+    padding: 10px 20px;          /* Add some padding to buttons */
+    font-size: 16px;             /* Adjust font size for buttons */
+}
+
+    </style>
+
+
+
+
+</head>
+<body>
+    <div class="container">
+       
+        <div class="title">Exam Invitation</div>
+        <div class="content">
+            
+            <form method="post" action=""  >
+                {% csrf_token %}
+                
+                <div class="user-details">
+                    
+                            
+                            <input type="text" id="examid" name="examid" value="{{exam.id}}" hidden>
+                            <input type="text" name="" id="" value="{{exam.catid_id}}" hidden>
+                        
+
+                  <div class="input-box">
+                    <span class="details">User Id</span>
+                    <input type="text" id="uid" name="uid" value="{{user.id}}" readonly>
+                </div>
+                   
+                    <div class="input-box">
+                        <span class="details">Full Name</span>
+                        <input type="text" id="name" name="name" value="{{user.name}}" readonly>
+                    </div>
+
+                  
+
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input type="text" id="email" name="email" value="{{user.email}}" readonly>
+                        
+                    </div>
+
+
+                    <div class="input-box">
+                        <span class="details">Category</span>
+                        <input type="text" id="category" name="category" value="{{user.categoryd.category_name}}" readonly>
+                    </div>
+
+                    
+                    
+                   
+                </div>
+
+                
+                <div class="button">
+                    <input type="submit" value="Accept"> 
+                    <input type="button" value="Not Now" onclick="window.location.href='{% url 'home' %}'">
+
+                  </div>
+                    
+            </form>
+        </div>
+    </div>
+
+  
+   
+     
+    
+</body>
+</html>

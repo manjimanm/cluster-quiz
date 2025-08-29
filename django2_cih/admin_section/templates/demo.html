@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GURU Able - Free Lite Admin Template </title>
+   
+   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const users = {
+            {% for user in users %}
+                "{{ user.id }}": {
+                    category_name: "{{ user.categoryd.category_name }}"
+                },
+            {% endfor %}
+        };
+        function updateCategory() {
+    const userSelect = document.getElementById("userid");
+    const categorySelect = document.getElementById("category");
+    const selectedUserId = userSelect.value;
+
+    if (selectedUserId in users) {
+        const categoryName = users[selectedUserId].category_name;
+        categorySelect.value = categoryName; // Update category field
+        document.getElementById("selected_user_id").value = selectedUserId;
+
+        // Fetch questions based on the newly selected category
+        fetchQuestionsByCategory();
+    } else {
+        categorySelect.value = "";
+    }
+}
+
+
+
+    </script>
+    <script>
+        function validateAndSubmit() {
+    const checkboxes = document.querySelectorAll('input[name="selected_q"]:checked');
+
+    if (checkboxes.length === 0) {
+        alert('Please select at least one question before submitting.');
+        return false; // Prevent form submission
+    }
+
+    // Proceed with form submission
+    return true; // Allow form to submit
+}
+
+    </script>
+    
+</head>
+<body>
+
+
+                        
+                              
+
+
+                                                                                <div class="container">
+        
+                                                                                    <form id="quizzerForm" method="POST" action="demo"  onsubmit="return validateAndSubmit();">
+                                                                                        {% csrf_token %}
+
+                                                                                        
+
+                                                                                        <label for="userid" class="col-sm-2 col-form-label">Select User:</label>
+                                                                                    <select id="userid"  class="form-control" name="userid" onchange="updateCategory()">
+                                                                                        <option value="">Select User</option>  
+                                                                                        {% for user in users %}
+                                                                                            <option value="{{ user.id }}" {% if user.id == selected_user_id %}selected{% endif %}>
+                                                                                                {{ user.name }} - {{ user.categoryd.category_name }}
+                                                                                                
+                                                                                            </option>
+                                                                                        
+                                                                                        {% endfor %}
+                                                                                      
+                                                                                    </select>
+                                                                                   
+                                                                                    <!-- <input type="text" id="selected_user_id" name="selected_user_id" value="{{ selected_user_id }}" readonly> -->
+                                                                                    
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-sm-2 col-form-label">User id</label>
+                                                                                        
+                                                                                            <input type="text" class="form-control"
+                                                                                            id="selected_user_id" name="selected_user_id" value="{{ selected_user_id }}"readonly>
+                                                                                       
+                                                                                    </div>
+
+                                                                                    <label for="category" class="col-sm-2 col-form-label">Select Category:</label>
+                                                                                        <select id="category" class="form-control" name="categoryname"  onchange="fetchQuestionsByCategory()">
+                                                                                            <option value="">All Categories</option>
+                                                                                            {% for category in categories %}
+                                                                                                <option value="{{ category }}" {% if category == selected_category %}selected{% endif %}>
+                                                                                                    {{ category }}
+                                                                                                   
+                                                                                                </option>
+                                                                                                
+                                                                                            {% endfor %}
+                                                                                          
+                                                                                        </select>
+
+                                                               
+                                                                                   
+        
+                                                                                          <div class="card-block">
+                                                                                                                    
+                        
+                                                                                        <div class="card">
+                                                                                            <div class="card-header">
+                                                                                                <h5>All Questions {% if selected_category %} - {{ selected_category }} {% endif %}</h5>
+                                                                                               
+                                                                                                <div class="card-header-right">    <ul class="list-unstyled card-option">        <li><i class="icofont icofont-simple-left "></i></li>        <li><i class="icofont icofont-maximize full-card"></i></li>        <li><i class="icofont icofont-minus minimize-card"></i></li>             <li><i class="icofont icofont-error close-card"></i></li>    </ul></div>
+                                                                                            </div>
+                                                                                            <div class="card-block table-border-style">
+                                                                                                <div class="table-responsive">
+                                                                                                    <table class="table table-inverse">
+                                                                                                        <thead>
+                                                                                                            <tr>
+                                                                                                                <th>Slno</th>
+                                                                                                                <th>Category Name</th>
+                                                                                                                <th>Question</th>
+                                                                                                              
+                                                                                                                <th>Action</th>
+                                                                                                            </tr>
+                                                                                                        </thead>
+                                                                                                        {% for question1 in quizz %}
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                
+                                                                                                <td>{{ forloop.counter }}</td>
+                                                                                                <td>{{ question1.category.category_name }}</td>
+                                                                                                <td>{{ question1.question }}</td>
+                                                                                                
+                                                                                                <td>
+                                                                                                <input type="checkbox" name="selected_q" value="{{question1.id}}" onclick="checkQuestionLimit()"  onchange="updateSelectedQuestions()">                       
+                                                                                                </td>
+                                                                                                
+                                                                                            </tr>
+                                                                                            {% empty %}
+                                                                                            <tr>
+                                                                                                <td colspan="8">No questions available for this category.</td>
+                                                                                            </tr>
+                                                                                            {% endfor %}
+                                                                                                            
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                        
+                                                                                       
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="form-group row">
+                                                                                                        <label class="col-sm-2 col-form-label">Question id</label>
+                                                                                                        <div class="col-sm-10">
+                                                                                                            <input type="text" name="q_ids" class="form-control form-control-normal"
+                                                                                                            placeholder="Selected Question IDs" readonly>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <button type="submit" class="btn btn-primary btn-round">Primary Button</button>
+                                                                                                </form>
+
+
+                                         >
+
+
+
+<script>
+    function updateSelectedQuestions() {
+        const checkboxes = document.querySelectorAll('input[name="selected_q"]:checked');
+        const selectedIds = Array.from(checkboxes).map(checkbox => checkbox.value);
+        const qIdsInput = document.querySelector('input[name="q_ids"]');
+        
+        qIdsInput.value = selectedIds.join(', ');
+    }
+    </script>
+    
+    <script>
+        function checkQuestionLimit() {
+            const checkboxes = document.querySelectorAll('input[name="selected_q"]:checked');
+            if (checkboxes.length > 10) {
+                alert('You can only select a maximum of 10 questions.');
+               
+                event.target.checked = false;
+            }
+        }
+    </script>
+    <script>
+        function fetchQuestionsByCategory() {
+    const categoryId = document.getElementById('category').value;
+    const selectedUserId = document.getElementById('userid').value;
+
+    if (selectedUserId && categoryId) {
+        fetch(`/fetch_questions/${categoryId}/`)
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.querySelector('table tbody');
+                tbody.innerHTML = '';
+
+                if (data.questions.length > 0) {
+                    data.questions.forEach((question, index) => {
+                        const row = `<tr>
+                            <td>${index + 1}</td>
+                            <td>${question.category_name}</td>
+                            <td>${question.question}</td>
+                            <td>
+                                <input type="checkbox" name="selected_q" value="${question.id}" onclick="checkQuestionLimit()" onchange="updateSelectedQuestions()">
+                            </td>
+                        </tr>`;
+                        tbody.insertAdjacentHTML('beforeend', row);
+                    });
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="4">No questions available for this category.</td></tr>`;
+                }
+            })
+            .catch(error => console.error('Error fetching questions:', error));
+    }
+}
+
+        </script>
+        
+    
+    
+</body>
+
+</html>

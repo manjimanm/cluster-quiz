@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzer Tutorial</title>
+
+  
+	<style>
+           @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600;700;800&display=swap);
+
+:root {
+    --primary: #c9d8e1;
+    --secondary: #5db7ee;
+    --accent: #e6e1e8;
+    --text: #171715;
+    --bg: #e6edf0;
+    --red: #913030;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --default-padding: 15px;
+    --default-border-radius: 10px;
+    --default-font-size: 1rem;
+    --title-font-size: 1.5rem;
+    --default-hover-opacity: 0.7;
+    --default-transition-time: 0.15s;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: 'Work Sans', sans-serif;
+}
+
+body, html {
+    background-image: linear-gradient(to top right, var(--bg), var(--primary));
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.panel {
+    background-color: var(--bg);
+    width: 60%;
+    border-radius: var(--default-border-radius);
+    padding: var(--default-padding);
+    box-shadow: 5px 5px 5px var(--shadow);
+}
+
+#app {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.inner-panel {
+    width: 100%;
+    border-radius: var(--default-border-radius);
+    padding: var(--default-padding);
+    background-color: var(--primary);
+}
+
+.question-label-container {
+    margin-bottom: var(--default-padding);
+    padding: var(--default-padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0082e6;
+}
+
+.questionSetNameContainer {
+    margin-bottom: var(--default-padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--title-font-size);
+}
+
+#optionList {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, 1fr);
+    flex-grow: 1;
+    gap: var(--default-padding);
+    overflow-y: auto;
+    margin-bottom: var(--default-padding);
+}
+
+.option {
+    background-color: var(--secondary);
+    border-radius: var(--default-border-radius);
+    display: grid;
+    grid-template-columns: 20px auto;
+    gap: var(--default-padding);
+    padding: var(--default-padding);
+    align-items: center;
+    cursor: default;
+    font-size: 20px;
+    transition: var(--default-transition-time);
+}
+
+.option:hover {
+    opacity: var(--default-hover-opacity);
+    outline: 2px solid var(--bg);
+}
+
+.submit-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#submitButton {
+    padding-left: var(--default-padding);
+    padding-right: var(--default-padding);
+    border: none;
+    border-radius: var(--default-border-radius);
+    background-color: var(--secondary);
+    height: 40px;
+    transition: var(--default-transition-time);
+}
+
+.end-screen {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.option input[type="radio"] {
+height: 24px; 
+width: 24px; 
+margin-right: 10px; 
+cursor: pointer; 
+}
+.option-selected {
+background-color: #dbdee7; 
+transition: background-color var(--default-transition-time);
+}
+
+
+
+
+ /* Sidebar Positioning and Layout */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px; /* Width of the sidebar */
+    height: 100vh; /* Full viewport height */
+    background-color: #9dccf5;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 items per row */
+    gap: 10px; /* General gap between columns */
+    padding-right: 10px; /* Padding to avoid overflow */
+}
+
+
+.sidebar a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px; /* Reduced padding for compactness */
+    background-color: #e6e1e8;
+    text-decoration: none;
+    color: #171715;
+    border-radius: 5px;
+    font-size: 14px; /* Font size for the number */
+    transition: background-color 0.3s;
+    text-align: center;
+    width: 40px; /* Fixed width for each box */
+    height: 40px; /* Fixed height for the box */
+    border: 2px solid #bbb; /* Border to make it look like a checkbox */
+    box-sizing: border-box; /* Include padding and border in the width/height */
+}
+
+
+/* Reduce the margin between the first and second row */
+.sidebar a:nth-child(n+6) {
+    margin-top: -170px; /* Reduce the space between the rows */
+}
+
+/* Hover effect for sidebar links */
+.sidebar a:hover {
+    background-color: #c9d8e1;
+}
+
+/* Adjust the main content (#app) to make space for the sidebar */
+#app {
+    margin-left: 300px; 
+    padding: 20px;
+}
+
+@media (max-width: 1200px) {
+    .sidebar {
+        width: 250px;
+    }
+
+    #app {
+        margin-left: 250px;
+    }
+}
+
+/* For small screens (mobile), make the sidebar a top bar or hamburger */
+@media (max-width: 900px) {
+    .sidebar {
+        width: 100%;
+        position: relative;
+        padding: 10px;
+        grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+        margin-bottom: 20px;
+    }
+
+    #app {
+        margin-left: 0;
+        padding: 15px;
+    }
+}
+
+/* For extra small screens (very mobile), adjust sidebar columns */
+@media (max-width: 600px) {
+    .sidebar {
+        grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+    }
+
+    #app {
+        padding: 15px;
+    }
+    #app {
+        max-height: 80vh;  /* Ensures the content area has a vertical limit */
+        overflow-y: auto;  /* Allows vertical scrolling */
+    }
+}
+
+/* Highlight sidebar question number in green when answered */
+.sidebar-link.answered {
+    background-color: #4caf50; /* Green background */
+    color: white; /* White text */
+    border-color: #4caf50; /* Green border */
+}
+
+
+
+
+
+/* Add toggle button styles */
+.sidebar-toggle {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #9dccf5;
+    padding: 10px;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Show the toggle button on small screens */
+@media (max-width: 900px) {
+    .sidebar-toggle {
+        display: block;
+    }
+
+    .sidebar {
+        display: none; /* Hide the sidebar initially */
+    }
+
+    .sidebar.open {
+        display: block; /* Show the sidebar when 'open' class is added */
+    }
+}
+
+
+    </style>
+    <script>
+        let totalQuestions = {{ questions|length }}; 
+    
+        
+        function updateScore() {
+            let score = 0;
+    
+            for (let i = 0; i < totalQuestions; i++) {
+                const selectedOption = document.querySelector(`input[name="options-${i}"]:checked`);
+                const correctAnswer = document.querySelector(`input[name="answer"][data-index="${i}"]`).value;
+    
+                if (selectedOption && selectedOption.value === correctAnswer) {
+                    score++;
+                }
+            }
+    
+            document.querySelector('.score-input').value = score; 
+        }
+    
+        
+        function validateAnswers() {
+            for (let i = 0; i < totalQuestions; i++) {
+                const selectedOption = document.querySelector(`input[name="options-${i}"]:checked`);
+                if (!selectedOption) {
+                    alert(`Please answer question ${i + 1}.`);
+                    return false;
+                }
+            }
+            return true; 
+        }
+    
+        
+        function handleSubmit(event) {
+            if (!validateAnswers()) {
+                event.preventDefault(); 
+            } else {
+                updateScore();
+            }
+        }
+    
+        
+        function addEventListeners() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', handleSubmit);
+    
+            for (let i = 0; i < totalQuestions; i++) {
+                const options = document.querySelectorAll(`input[name="options-${i}"]`);
+                options.forEach(option => {
+                    option.addEventListener('change', updateScore);
+                });
+            }
+        }
+    
+        window.onload = addEventListeners;
+    </script>
+    
+</head>
+<body>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
+
+    <br><br>
+    <button id="sidebarToggle" class="sidebar-toggle">☰</button> 
+    <div class="sidebar" id="sidebar" style="margin-top: 80px;">
+      
+
+       
+        {% for question in questions %}
+            <!-- Each question number is a clickable link in the sidebar -->
+            <a href="#question-{{ forloop.counter0 }}" class="sidebar-link">{{ forloop.counter }}</a>
+        {% endfor %}
+    </div>
+
+    <!-- Main Content -->
+    <div id="app">
+        <form style="margin:50px 180px 0px 180px;" method="POST" action="{% url 'questionare' %}">
+            {% csrf_token %}
+            <input type="hidden" id="uid" name="uid" value="{{uid}}" required>
+            <input type="hidden" id="category_name" name="category_name" value="{{ selected_category }}" required>
+            <input type="hidden" name="aid" value="1">
+
+            {% for question in questions %}
+                <div id="gameplay" class="question" id="question-{{ forloop.counter0 }}">
+                    <div class="question-label-container inner-panel">
+                        <h1>{{ forloop.counter }}.</h1>&nbsp;&nbsp;
+                        <h2 id="questionLabel">{{ question.question }}</h2>&nbsp;
+                        <input type="hidden" name="qid" value="{{question.id}}">
+                    </div>
+
+                    <div id="optionList" class="inner-panel">
+                        <div class="option">
+                            <input type="radio" id="option1-{{ forloop.counter0 }}" name="options-{{ forloop.counter0 }}" value="option1" data-index="{{ forloop.counter0 }}">
+                            <label for="option1-{{ forloop.counter0 }}">{{ question.option1 }}</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="option2-{{ forloop.counter0 }}" name="options-{{ forloop.counter0 }}" value="option2" data-index="{{ forloop.counter0 }}">
+                            <label for="option2-{{ forloop.counter0 }}">{{ question.option2 }}</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="option3-{{ forloop.counter0 }}" name="options-{{ forloop.counter0 }}" value="option3" data-index="{{ forloop.counter0 }}">
+                            <label for="option3-{{ forloop.counter0 }}">{{ question.option3 }}</label>
+                        </div>
+                        <input type="hidden" name="answer" data-index="{{ forloop.counter0 }}" value="{{ question.answer }}">
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div>
+                <input type="hidden" name="score" class="score-input" value="0" readonly>
+            </div>
+
+            <div class="submit-button-container inner-panel">
+                <button id="submitButton" class="submit-button">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+
+<script>
+    
+function highlightSelectedOption() {
+    const optionLists = document.querySelectorAll('#optionList');
+
+    optionLists.forEach(optionList => {
+        const options = optionList.querySelectorAll('.option');
+        
+        options.forEach(option => {
+            const radio = option.querySelector('input[type="radio"]');
+
+            radio.addEventListener('change', () => {
+                options.forEach(opt => {
+                    opt.classList.remove('option-selected'); 
+                });
+                option.classList.add('option-selected'); 
+            });
+        });
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', highlightSelectedOption);
+
+</script>
+
+<script>
+    function highlightSidebarQuestion() {
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', () => {
+            const questionIndex = radio.getAttribute('name').split('-')[1];
+
+            const sidebarLink = document.querySelector(`.sidebar-link[href="#question-${questionIndex}"]`);
+
+            if (sidebarLink) {
+                sidebarLink.classList.add('answered');
+            }
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', highlightSidebarQuestion);
+
+</script>
+
+
+<script>
+   function scrollToQuestion() {
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();  // Prevent default anchor behavior
+
+            const targetQuestionId = link.getAttribute('href').substring(1);  // Remove the '#'
+            const targetQuestion = document.getElementById(targetQuestionId);
+
+            if (targetQuestion) {
+                // Scroll to the question with smooth behavior
+                targetQuestion.scrollIntoView({
+                    behavior: 'smooth', 
+                    block: 'start',
+                });
+            }
+        });
+    });
+}
+
+// Wait for the DOM content to load before adding event listeners
+document.addEventListener('DOMContentLoaded', scrollToQuestion);
+</script>
+
+
+<script>
+    // JavaScript for toggling the sidebar visibility
+document.getElementById('sidebarToggle').addEventListener('click', function() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('open');
+});
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam</title>
+    <style>
+      /* Existing styles for the page remain the same */
+      
+      @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600;700;800&display=swap);
+    
+      :root {
+        --primary: #c9d8e1;
+        --secondary: #5db7ee;
+        --accent: #e6e1e8;
+        --text: #171715;
+        --bg: #e6edf0;
+        --red: #913030;
+        --shadow: rgba(0,0,0,0.4);
+    
+        /* numeric */
+        --default-padding: 15px;
+        --default-border-radius: 10px;
+        --default-font-size: 1rem;
+        --title-font-size: 1.5rem;
+        --default-hover-opacity: 0.7;
+        --default-transition-time: 0.15s;
+        --bar-accuracy-percent: 0%;
+      }
+    
+      * {
+        color: var(--text);
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    
+      body, html {
+        justify-content: center;
+        align-items: center;
+      }
+    
+      form {
+        justify-content: center;
+        margin:50px 0px 0px 245px;
+        width: 1000px;
+        padding: var(--default-padding);
+        border-radius: var(--default-border-radius);
+        box-shadow: 5px 5px 10px var(--shadow);
+      }
+    
+      .question-container {
+        display: none; 
+        padding: var(--default-padding);
+        border-radius: var(--default-border-radius);
+        background-color: var(--secondary);
+        box-shadow: 0 2px 5px var(--shadow);
+        margin-bottom: var(--default-padding);
+      }
+    
+      .question-label-container {
+        background-color: #e6e1e8;
+        margin-bottom: var(--default-padding);
+        padding: var(--default-padding);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    
+      .option {
+        background-color: aliceblue;
+        border-radius: var(--default-border-radius);
+        display: flex;
+        align-items: center;
+        gap: var(--default-padding); /* Space between radio and label */
+        padding: var(--default-padding);
+        cursor: pointer;
+        font-size: 20px;
+        transition: var(--default-transition-time);
+      }
+    
+      .option:hover {
+        background-color: rgb(16, 180, 245); /* Subtle hover effect */
+      }
+    
+      input[type="radio"] {
+        height: 24px;
+        width: 24px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+    
+      .submit-button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    
+      #submitButton {
+        background-color: #09973b; 
+        border: none;
+        color: rgb(255, 255, 255);
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+    
+      #submitButton:hover {
+        background-color: rgb(3, 78, 29);
+        color: rgb(245, 251, 247); 
+      }
+    
+      .submit-button-disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    
+      #prevButton {
+        background-color: #0f1010; 
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+    
+      #nextButton {
+        background-color: #199ff8; 
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+    
+      .questionSetNameContainer {
+        margin-bottom: var(--default-padding);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--title-font-size);
+      }
+    
+      input {
+        width: 100%;
+        padding: 20px;
+        margin-left: 20px;
+        margin-right: 30px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+    
+      input[type='text'] {
+        font-size: 20px;
+      }
+    
+      /* Media Queries for Responsiveness */
+    
+      @media (max-width: 1024px) {
+        form {
+          width: 90%;  /* Adjust form width to fit smaller screens */
+          margin-left: auto;
+          margin-right: auto;
+        }
+    
+        #submitButton, #prevButton, #nextButton {
+          padding: 12px 20px;  /* Smaller buttons on medium screens */
+          font-size: 14px;
+        }
+    
+        .question-label-container {
+          padding: 10px;
+        }
+      }
+    
+      @media (max-width: 768px) {
+        form {
+          width: 95%;
+          margin: 20px;  /* Reduce margin for smaller screens */
+        }
+    
+        .submit-button-container {
+          flex-direction: column;  /* Stack buttons vertically on smaller screens */
+        }
+    
+        #submitButton, #prevButton, #nextButton {
+          width: 100%;  /* Make buttons full-width on mobile */
+          margin-bottom: 10px;
+        }
+    
+        .question-label-container {
+          padding: 8px;
+        }
+    
+        .option {
+          font-size: 18px;  /* Smaller font size for options */
+          padding: 12px;
+        }
+    
+        .question-container {
+          padding: 10px;  /* Reduce padding inside questions */
+        }
+    
+        input {
+          padding: 10px;  /* Smaller input fields */
+        }
+      }
+    
+      @media (max-width: 480px) {
+        form {
+          width: 100%;
+          padding: 10px;
+        }
+    
+        .submit-button-container {
+          flex-direction: column;
+        }
+    
+        #submitButton, #prevButton, #nextButton {
+          width: 100%;
+          padding: 10px;
+        }
+    
+        .question-label-container {
+          padding: 5px;
+        }
+    
+        .option {
+          font-size: 16px;
+          padding: 10px;
+        }
+    
+        input {
+          padding: 8px;
+        }
+      }
+    </style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    let totalScore = 0;  // Variable to keep track of the total score
+    
+    // Function to update the score display
+    function updateScore() {
+      // Reset the total score
+      totalScore = 0;
+
+      // Loop through all questions
+      const questions = document.querySelectorAll('.question-container');
+      questions.forEach(function(question, index) {
+        // Get the selected answer for this question
+        const selectedAnswer = question.querySelector(`input[name="options-${index + 1}"]:checked`);
+
+        // Get the correct answer from the hidden input
+        const correctAnswer = question.querySelector(`input[name="answer-${index}"]`).value;
+
+        // If the selected answer is correct, increment the score
+        if (selectedAnswer && selectedAnswer.value === correctAnswer) {
+          totalScore += 1;
+        }
+      });
+
+      // Update the score input field
+      const scoreInputs = document.querySelectorAll('.score-input');
+      scoreInputs.forEach(function(scoreInput) {
+        scoreInput.value = totalScore;  // Display the total score
+      });
+    }
+
+    // Add event listeners to all radio buttons
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(function(radio) {
+      radio.addEventListener('change', updateScore);  // Update score on radio button change
+    });
+  });
+</script>
+
+
+
+
+  
+    
+</head>
+<body>
+ <header>
+  {% include 'navbar.html' %}
+ </header>
+
+    <div id="mainContainer">
+      <form method="POST" action="{% url 'assigned_exam' exam_id=exam.id %}">
+        {% csrf_token %}
+        <input type="text" name="exam_id" value="{{ exam.id }}">
+        <input type="text" name="examstatus" value="{{ applied_exam.status }}" id="">
+            <div class="questionSetNameContainer panel">
+                <h1 id="questionSetLabel" class="title-text"> Your Assigned Test </h1>
+        
+            </div>
+           
+ 
+
+<h3>Exam: {{ exam.id }}</h3>
+<h3>Category: {{ category_name }}</h3>
+<h3>Scheduled on: {{ exam.set_date }} at {{ exam.set_time }}</h3>
+<h3>Allowed Time: {{ allowed_time }}</h3><br><br>
+<h3>Applied Exam: {{ applied_exam.status }}</h3>
+
+
+    <!-- <div class="questionSetNameContainer panel">
+        <h1 id="questionSetLabel" class="title-text"> Your Assigned Test </h1>
+    </div> -->
+<!-- 
+    {% for question in questions %}
+    <div class="question-container question-item">
+        <div class="question-label-container">
+            <h2>{{ question.question }}</h2>
+        </div>
+        <div id="optionList">
+            <div class="option">
+                <input type="radio" id="option1-{{ forloop.counter0 }}" name="options-{{ forloop.counter0 }}" value="option1">
+                <label for="option1-{{ forloop.counter0 }}">{{ question.option1 }}</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="option2-{{ forloop.counter0 }}" name="options-{{ forloop.counter0 }}" value="option2">
+                <label for="option2-{{ forloop.counter0 }}">{{ question.option2 }}</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="option3-{{ forloop.counter0 }}" name="options-{{ forloop.counter0 }}" value="option3">
+                <label for="option3-{{ forloop.counter0 }}">{{ question.option3 }}</label>
+            </div>
+        </div>
+        <input type="hidden" name="answer" data-index="{{ forloop.counter0 }}" value="{{ question.answer }}">
+    </div>
+    {% endfor %} -->
+
+
+    <!-- {% for question in questions %}
+    
+<div class="question-container">
+    <h2>{{ forloop.counter }}.{{ question.question }}</h2><br>
+    <div class="options">
+      <div class="option">
+          <input type="radio" id="option1-{{ forloop.counter }}" name="options-{{ forloop.counter }}" value="option1">
+          <label for="option1-{{ forloop.counter }}">{{ question.option1 }}</label>
+      </div> <br>
+      <div class="option">
+          <input type="radio" id="option2-{{ forloop.counter }}" name="options-{{ forloop.counter }}" value="option2">
+          <label for="option2-{{ forloop.counter }}">{{ question.option2 }}</label>
+      </div> <br>
+      <div class="option">
+          <input type="radio" id="option3-{{ forloop.counter }}" name="options-{{ forloop.counter }}" value="option3">
+          <label for="option3-{{ forloop.counter }}">{{ question.option3 }}</label>
+      </div><br>
+
+        <input type="text" name="answer-{{ forloop.counter0 }}" value="{{ question.answer }}">
+
+        <div>
+          <input type="text" name="score" class="score-input" value="0" readonly>
+      </div>
+    </div>
+</div>
+
+{% endfor %} -->
+
+
+
+{% for question in questions %}
+<div class="question-container">
+  <div class="question-label-container">
+    <h2>{{ forloop.counter }}. {{ question.question }}</h2>
+    <input type="text" name="qid" value="{{ question.id }}">
+</div>
+  <!-- <h2>{{ forloop.counter }}. {{ question.question }}</h2><br> -->
+  <div class="options">
+    <div class="option">
+        <input type="radio" id="option1-{{ forloop.counter }}" name="options-{{ forloop.counter }}" value="option1" data-correct-answer="{{ question.answer }}">
+        <label for="option1-{{ forloop.counter }}">{{ question.option1 }}</label>
+    </div><br>
+    <div class="option">
+        <input type="radio" id="option2-{{ forloop.counter }}" name="options-{{ forloop.counter }}" value="option2" data-correct-answer="{{ question.answer }}">
+        <label for="option2-{{ forloop.counter }}">{{ question.option2 }}</label>
+    </div><br>
+    <div class="option">
+        <input type="radio" id="option3-{{ forloop.counter }}" name="options-{{ forloop.counter }}" value="option3" data-correct-answer="{{ question.answer }}">
+        <label for="option3-{{ forloop.counter }}">{{ question.option3 }}</label>
+    </div><br>
+
+    <!-- Hidden field to store the correct answer -->
+    <input type="hidden" name="answer-{{ forloop.counter0 }}" value="{{ question.answer }}" class="correct-answer">
+
+    <div>
+      <!-- Score input that will be updated -->
+      <input type="text" name="score" class="score-input" value="0" readonly>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+
+
+
+    <div class="submit-button-container">
+        <button type="button" id="prevButton" disabled>Previous</button>
+        <button type="button" id="nextButton">Next</button>
+        <button type="submit" id="submitButton" style="display: none;">Submit</button>
+    </div>
+
+    <!-- <div id="timer" style="font-size: 24px; text-align: center;"></div>
+    <p id="datetime"></p> -->
+</form>
+    </div>
+    
+    
+    
+    
+
+
+
+    <script>
+        const questions = document.querySelectorAll('.question-container');
+        let currentQuestion = 0;
+
+        
+        questions[currentQuestion].style.display = 'block';
+
+        document.getElementById('nextButton').addEventListener('click', function() {
+            if (currentQuestion < questions.length - 1) {
+                questions[currentQuestion].style.display = 'none';
+                currentQuestion++;
+                questions[currentQuestion].style.display = 'block';
+                updateButtons();
+            }
+        });
+
+        document.getElementById('prevButton').addEventListener('click', function() {
+            if (currentQuestion > 0) {
+                questions[currentQuestion].style.display = 'none';
+                currentQuestion--;
+                questions[currentQuestion].style.display = 'block';
+                updateButtons();
+            }
+        });
+
+        function updateButtons() {
+            document.getElementById('prevButton').disabled = currentQuestion === 0;
+            document.getElementById('nextButton').style.display = currentQuestion < questions.length - 1 ? 'block' : 'none';
+            document.getElementById('submitButton').style.display = currentQuestion === questions.length - 1 ? 'block' : 'none';
+        }
+    </script>
+
+</body>
+<!-- <script>
+    
+    var now = new Date();
+    var datetime = now.toLocaleString();
+  
+    document.getElementById("datetime").innerHTML = datetime;
+  </script> -->
+  
+  <!-- <script>
+    const timeLimit = 300; 
+    let timeRemaining = timeLimit;  
+    function updateTimer() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            alert('Time is up! Submitting your answers.');
+            document.querySelector('form').submit(); 
+        } else {
+            timeRemaining--;
+        }
+    }
+
+    const timerInterval = setInterval(updateTimer, 1000);
+</script> -->
+
+</html>

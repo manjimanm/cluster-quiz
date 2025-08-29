@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>No Exams Available</title>
+    <style>
+        * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  
+  body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  }
+  
+  .error-wrapper {
+      text-align: center;
+      animation: fadeIn 1s ease-out;
+  }
+  
+  .emoji {
+      font-size: 100px;
+      animation: shake 0.5s infinite alternate;
+  }
+  
+  h1 {
+      font-size: 60px;
+      color: #f44336;
+  }
+  
+  p {
+      font-size: 18px;
+      color: #333;
+      margin: 20px 0;
+  }
+  
+  .home-link {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #109ccb;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 18px;
+      transition: background-color 0.3s;
+  }
+  
+  .home-link:hover {
+      background-color: #79c0e9;
+  }
+  
+  @keyframes shake {
+      0% { transform: translateX(-10px); }
+      100% { transform: translateX(10px); }
+  }
+  
+  @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+  }
+  
+      </style>
+  </head>
+  <body>
+     
+      
+      <div class="error-wrapper">
+        <div class="emoji">🥰</div>
+          <h1>Hello, {{ uname }}!</h1>
+          <p>Currently, you do not have any exams available. Please check back later or contact support for more information.</p>
+          <a href="{% url 'home' %}" class="home-link">Back to Homepage</a>
+      </div>
+   
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        /* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling for the profile page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.profile-container {
+    background-color: #fff;
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+
+.profile-header {
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.username {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.user-role {
+    font-size: 16px;
+    color: #777;
+}
+
+/* Styling for the contact info and about sections */
+.profile-details,
+.profile-bio {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* Button styling */
+.edit-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="profile-pic.jpg" alt="User Profile Picture" class="profile-pic">
+            <h1 class="username">John Doe</h1>
+            <p class="user-role">Software Developer</p>
+        </div>
+        
+        <div class="profile-details">
+            <h2>Contact Information</h2>
+            <ul>
+                <li><strong>Email:</strong> john.doe@example.com</li>
+                <li><strong>Phone:</strong> (123) 456-7890</li>
+                <li><strong>Location:</strong> New York, USA</li>
+            </ul>
+        </div>
+
+        <div class="profile-bio">
+            <h2>About Me</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur euismod libero non augue consequat, et consectetur dolor vestibulum.</p>
+        </div>
+
+        <div class="profile-footer">
+            <button class="edit-btn">Edit Profile</button>
+        </div>
+    </div>
+</body>
+</html>

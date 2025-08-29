@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+  <!-- Font Awesome Link for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <style>
+
+
+
+
+
+
+.ag-format-container {
+  width: 1142px;
+  margin: 0 auto;
+  margin-top: 250px;
+}
+
+
+.ag-courses_box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  padding: 50px 0;
+}
+.ag-courses-item_link {
+  display: flex;
+  flex-direction: column;  /* Stack the elements vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center;     /* Center content horizontally */
+  padding: 15px 8px 15px 10px;      /* Reduced padding for a smaller card */
+  background-color: #2464a4;
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;     /* Optional: smaller border radius */
+  height: 150px;            /* Make sure the link occupies full height */
+  text-align: center;      /* Ensure text is centered */
+}
+
+.ag-courses-item_title {
+  font-weight: bold;
+  font-size: 24px;         /* Adjust the font size */
+  color: #FFF;
+  margin-bottom: 10px;     /* Space below the title */
+  z-index: 2;
+  position: relative;
+}
+
+/* Adjust for smaller screens */
+@media only screen and (max-width: 979px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: calc(50% - 20px); /* Adjust for tablets */
+    flex-basis: calc(50% - 20px);
+  }
+
+  .ag-courses-item_title {
+    font-size: 22px;  /* Slightly smaller font on medium screens */
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ag-format-container {
+    width: 96%;  /* Adjust container width on smaller screens */
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%; /* Full width cards on small screens */
+  }
+
+  .ag-courses-item_title {
+    font-size: 20px;  /* Smaller font size on mobile */
+  }
+/* 
+  .ag-courses-item_link {
+    padding: 15px 20px;  
+  } */
+}
+
+
+.ag-courses_item {
+  -ms-flex-preferred-size: calc(33.33333% - 30px); /* Adjusted flex basis for smaller card size */
+  flex-basis: calc(33.33333% - 30px); /* Reduced card size */
+  margin: 0 10px 20px;  /* Reduced margin between cards */
+  overflow: hidden;
+  border-radius: 15px;  /* Optional: smaller border radius for compact cards */
+}
+
+.ag-courses-box {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px 0;  /* Reduced padding around the whole container */
+}
+
+/* Adjust for smaller screens */
+@media only screen and (max-width: 979px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: calc(50% - 20px); /* Reduced size for tablets */
+    flex-basis: calc(50% - 20px); /* Adjusted for smaller cards on medium screens */
+  }
+
+  .ag-courses-item_title {
+    font-size: 22px;  /* Slightly smaller font on medium screens */
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ag-format-container {
+    width: 96%;  /* Reduced width for smaller screen sizes */
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%; /* Full width cards on small screens */
+  }
+
+  .ag-courses-item_title {
+    font-size: 20px;  /* Slightly smaller font on mobile screens */
+  }
+
+  /* .ag-courses-item_link {
+    padding: 15px 20px; 
+  } */
+}
+
+.ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_date {
+  text-decoration: none;
+  color: #FFF;
+}
+.ag-courses-item_link:hover .ag-courses-item_bg {
+  -webkit-transform: scale(10);
+  -ms-transform: scale(10);
+  transform: scale(10);
+}
+.ag-courses-item_title {
+  /* min-height: 87px; */
+  margin: 0 0 25px;
+
+  overflow: hidden;
+
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+.ag-courses-item_date-box {
+  font-size: 18px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+.ag-courses-item_date {
+  font-weight: bold;
+  color: #f9b234;
+
+  -webkit-transition: color .5s ease;
+  -o-transition: color .5s ease;
+  transition: color .5s ease
+}
+.ag-courses-item_bg {
+  height: 128px;
+  width: 128px;
+  background-color: #f9b234;
+
+  z-index: 1;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+
+  border-radius: 50%;
+
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+.ag-courses_item:nth-child(2n) .ag-courses-item_bg {
+  background-color: #3ecd5e;
+}
+.ag-courses_item:nth-child(3n) .ag-courses-item_bg {
+ 
+  background-color: #952aff;
+}
+.ag-courses_item:nth-child(4n) .ag-courses-item_bg {
+  background-color: #e44002;
+}
+.ag-courses_item:nth-child(5n) .ag-courses-item_bg {
+  background-color: #cd3e94;
+}
+.ag-courses_item:nth-child(6n) .ag-courses-item_bg {
+  background-color: #4c49ea;
+}
+
+
+
+@media only screen and (max-width: 979px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: calc(50% - 30px);
+    flex-basis: calc(50% - 30px);
+  }
+  .ag-courses-item_title {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ag-format-container {
+    width: 96%;
+  }
+
+}
+@media only screen and (max-width: 639px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+  }
+  .ag-courses-item_title {
+    min-height: 72px;
+    line-height: 1;
+
+    font-size: 24px;
+  }
+  /* .ag-courses-item_link {
+    padding: 22px 40px;
+  } */
+  .ag-courses-item_date-box {
+    font-size: 16px;
+  }
+}
+
+
+.submit_btn {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.position-relative {
+    display: flex;
+    justify-content: center;  /* Centers the button horizontally */
+    align-items: center;      /* Centers the button vertically */
+    height: 100px;            /* Set a height for vertical centering */
+}
+
+.submit_btn:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+/* Style for the alert box */
+.alert {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+/* Style for 'info' alert (you can add other types such as success, error, etc.) */
+.alert-info {
+    background-color: #17a2b8; /* Light blue */
+    border-left: 5px solid #138496; /* Darker blue border */
+}
+
+.alert p {
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.alert .close-btn {
+    cursor: pointer;
+    margin-left: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: none;
+    border: none;
+}
+
+  </style>
+</head>
+
+<body>
+  <header>
+    {% include 'navbar.html' %}
+  </header>
+
+
+
+  {% if messages %}
+  <div class="alert alert-info">
+      {% for message in messages %}
+          <p>{{ message }}</p>
+      {% endfor %}
+      <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+  </div>
+{% endif %}
+
+  <div class="ag-format-container">
+    <div class="ag-courses_box">
+
+    <div class="ag-courses_item">
+      <a href="{% url 'test' %}" class="ag-courses-item_link">
+        <div class="ag-courses-item_bg"></div>
+
+        <div class="ag-courses-item_title">
+          <h1 class="text-center text-white mb-4" style="font-size: 20px;">Attend Your Practice Session</h1>
+          <!-- <p class="text-white mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit sed stet lorem sit clita duo justo</p> -->
+          <div class="position-relative w-100 mt-3">
+              <form action="{% url 'test' %}" method="GET">
+                  
+                   <input type="hidden" id="category" class="form-control" name="categoryname" placeholder="Category Name" 
+                 value="{{category_name}}" readonly >
+                 
+                  <button type="submit" class="submit_btn" >Start Now</button>
+              </form>
+              
+          </div>
+        </div>
+
+        <!-- <div class="ag-courses-item_date-box">
+          Start:
+          <span class="ag-courses-item_date">
+            04.11.2022
+          </span>
+        </div> -->
+      </a>
+    </div>
+
+
+
+<!--     
+      <div class="ag-courses_item">
+        <a href="{% url 'questionare' %}" class="ag-courses-item_link">
+          <div class="ag-courses-item_bg"></div>
+  
+          <div class="ag-courses-item_title">
+            <h3 class="text-center text-white mb-3" style="font-size: 20px;">Attend Your Practice Session </h3>
+            <p class="text-white mb-4"></p>
+            <div class="position-relative w-100 mt-3">
+                <form action="{% url 'questionare' %}" method="GET" class="d-flex justify-content-center">
+                    
+                    <input type="hidden" id="category" class="form-control" name="categoryname" placeholder="Category Name" 
+                    value="{{category_name}}" readonly>
+                    
+                    <button type="submit" class="submit_btn">Start Now</button>
+                </form>
+            </div>
+        </div>
+         -->
+  
+          <!-- <div class="ag-courses-item_date-box">
+            Start:
+            <span class="ag-courses-item_date">
+              04.11.2022
+            </span>
+          </div> 
+        </a>
+      </div> -->
+  
+      
+  
+      <div class="ag-courses_item">
+        <a href="{% url 'exam' %}" class="ag-courses-item_link">
+          <div class="ag-courses-item_bg"></div>
+  
+          <div class="ag-courses-item_title">
+            <h1 class="text-center text-white mb-4" style="font-size: 20px;">Join The Mock Test</h1>
+                        <p class="text-white mb-4"></p>
+                        <div class="position-relative w-100 mt-3">
+                            <form action="{% url 'exam' %}" method="GET">
+                                
+                                 <input type="hidden" id="category" class="form-control" name="categoryname" placeholder="Category Name" 
+                               value="{{category_name}}" readonly >
+                               
+                                <button type="submit" class="submit_btn" >Start Now</button>
+                            </form>
+                            
+                        </div>
+          </div>
+  
+        
+        </a>
+      </div>
+
+
+      <!-- <div class="ag-courses_item">
+        <a href="{% url 'aptitude_test' %}" class="ag-courses-item_link">
+          <div class="ag-courses-item_bg"></div>
+  
+          <div class="ag-courses-item_title">
+            <h1 class="text-center text-white mb-4" style="font-size: 20px;">Here Your Crown Assessment</h1>
+           
+            <div class="position-relative w-100 mt-3">
+                <form action="{% url 'aptitude_test' %}" method="GET">
+                    
+                     <input type="hidden" id="category" class="form-control" name="categoryname" placeholder="Category Name" 
+                   value="{{category_name}}" readonly >
+                   
+                    <button type="submit" class="submit_btn" >Start Now</button>
+                </form>
+                
+            </div>
+          </div> -->
+  
+          <!-- <div class="ag-courses-item_date-box">
+            Start:
+            <span class="ag-courses-item_date">
+              04.11.2022
+            </span>
+          </div>
+      </a>
+      </div> -->
+  
+     
+      
+
+
+<!-- 
+      
+      {% if exam %}
+    
+      <div class="ag-courses_item">
+          <a href="{% url 'assigned_exam' exam_id=exam.id %}" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+              <div class="ag-courses-item_title">
+                  <h1 class="text-center text-white mb-4" style="font-size: 20px;">Here Your Crown Assessment</h1>
+                  <div class="position-relative w-100 mt-3">
+                      <form action="{% url 'assigned_exam' exam_id=exam.id %}" method="GET">
+                          
+                          <button type="submit" class="submit_btn">Start Now</button>
+                      </form>
+                  </div>
+              </div>
+          </a>
+      </div>
+  {% else %}
+      
+  {% endif %}
+  
+ 
+  {% for exam in exams %}
+     
+
+
+
+      {% if exam.id != exam.id %}
+          <div class="ag-courses_item">
+              <a href="{% url 'assigned_exam' exam_id=exam.id %}" class="ag-courses-item_link">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">
+                      <h1 class="text-center text-white mb-4" style="font-size: 20px;">{{ exam.created_for }}</h1>
+                      <div class="position-relative w-100 mt-3">
+                          <form action="{% url 'assigned_exam' exam_id=exam.id %}" method="GET">
+                             
+                              <button type="submit" class="submit_btn">Start Now</button>
+                          </form>
+                      </div>
+                  </div>
+              </a>
+          </div>
+      {% endif %}
+  {% endfor %}
+  
+  
+         
+        </a>
+      </div> -->
+
+
+    
+<!--     
+     <div class="ag-courses_item">
+    {% if plan_link %}
+        <a href="{% url plan_link %}" class="ag-courses-item_link">
+            <div class="ag-courses-item_bg"></div>
+            <div class="ag-courses-item_title">
+                <h1 class="text-center text-white mb-4" style="font-size: 20px;">new exam</h1>
+                <div class="position-relative w-100 mt-3">
+                    <form action="{% url plan_link %}" method="GET">
+                        <input type="hidden" name="categoryname" value="{{ category_name }}" readonly>
+                        <button type="submit" class="submit_btn">Start Now</button>
+                    </form>
+                </div>
+            </div>
+        </a>
+    {% else %}
+        <div class="ag-courses-item_title">
+            <h1 class="text-center text-white mb-4" style="font-size: 20px;">You haven't applied for any exam yet</h1>
+            <p>Please apply for an exam to begin.</p>
+        </div>
+    {% endif %}
+</div> -->
+
+
+
+{% if assessment_link %}
+<a href="{% url assessment_link %}" class="ag-courses-item_link">
+    <div class="ag-courses-item_bg"></div>
+    <div class="ag-courses-item_title">
+        <h1 class="text-center text-white mb-4" style="font-size: 20px;">Here Your Crown Assessment</h1>
+        <div class="position-relative w-100 mt-3">
+            <form action="{% url assessment_link %}" method="GET">
+                <input type="hidden" name="categoryname" value="{{ category_name }}" readonly>
+                <button type="submit" class="submit_btn">Start Now</button>
+            </form>
+        </div>
+    </div>
+</a>
+{% else %}
+<div class="ag-courses-item_title">
+    <h1 class="text-center text-white mb-4" style="font-size: 20px;">You haven't applied for any exam yet</h1>
+    <p>Please apply for an exam to begin.</p>
+</div>
+{% endif %}
+</div>
+  
+
+
+
+</a>
+</div>
+  
+    
+  
+    </div>
+  </div>
+</body>
+
+</html>

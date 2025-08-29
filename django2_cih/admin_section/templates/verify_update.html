@@ -1,0 +1,491 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin- verify question update</title>
+    <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content="CodedThemes">
+    <meta name="keywords"
+    content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="author" content="CodedThemes">
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon">
+    <!-- Google font--><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap/css/bootstrap.min.css' %}">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/themify-icons/themify-icons.css' %}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/icofont/css/icofont.css' %}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/jquery.mCustomScrollbar.css' %}">
+</head>
+
+<body>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+            </div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+
+            <nav class="navbar header-navbar pcoded-header">
+                <div class="navbar-wrapper">
+
+                    <div class="navbar-logo">
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="ti-menu"></i>
+                        </a>
+                        <a class="mobile-search morphsearch-search" href="#">
+                            <i class="ti-search"></i>
+                        </a>
+                        <a href="{% url 'index' %}">
+                            <!-- <img class="img-fluid" src="{% static 'assets/images/logo.png' %}" alt="Theme-Logo" /> -->
+                             <h2>ADMIN</h2>
+                        </a>
+                        <a class="mobile-options">
+                            <i class="ti-more"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-left">
+                            <li>
+                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                            </li>
+                            
+                            <li>
+                                <a href="#!" onclick="javascript:toggleFullScreen()">
+                                    <i class="ti-fullscreen"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav-right">
+                            <!-- <li class="header-notification">
+                                <a href="#!">
+                                    <i class="ti-bell"></i>
+                                    <span class="badge bg-c-pink"></span>
+                                </a>
+                                <ul class="show-notification">
+                                    <li>
+                                        <h6>Notifications</h6>
+                                        <label class="label label-danger">New</label>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="{% static 'assets/images/user.png' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">John Doe</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="{% static 'assets/images/user.png' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">Joseph William</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="{% static 'assets/images/user.png' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">Sara Soudein</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li> -->
+                            <li class="user-profile header-notification">
+                                <a href="">
+                                  
+                                    <img src="https://cdn-icons-png.flaticon.com/128/149/149071.png" class="img-radius"  alt="User-Profile-Image">
+                                    <span>Account</span>
+                                    <i class="ti-angle-down"></i>
+                                </a>
+                                <ul class="show-notification profile-notification">
+                                    <!-- <li>
+                                        <a href="#!">
+                                            <i class="ti-settings"></i> Settings
+                                        </a>
+                                    </li> -->
+                                    <li>
+                                        <a href="{% url 'profile' %}">
+                                            <i class="ti-user"></i> Profile
+                                        </a>
+                                    </li>
+                                    <!-- <li>
+                                        <a href="#">
+                                            <i class="ti-email"></i> My Messages
+                                        </a>
+                                    </li> -->
+                                    <!-- <li>
+                                        <a href="#">
+                                            <i class="ti-lock"></i> Lock Screen
+                                        </a>
+                                    </li> -->
+                                    <li>
+                                        <a href="{% url 'adminlogout' %}">
+                                            <i class="ti-layout-sidebar-left"></i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </nav>
+
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                   <header>
+                    {% include 'header.html' %}
+                   </header>
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page-header start -->
+                                    <!-- <div class="page-header card">
+                                        <div class="row align-items-end">
+                                            <div class="col-lg-8">
+                                                <div class="page-header-title">
+                                                    <i class="icofont icofont-file-code bg-c-blue"></i>
+                                                    <div class="d-inline">
+                                                        <h4>Basic Form Inputs</h4>
+                                                        <span>Lorem ipsum dolor sit <code>amet</code>, consectetur adipisicing elit</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="page-header-breadcrumb">
+                                                    <ul class="breadcrumb-title">
+                                                        <li class="breadcrumb-item">
+                                                            <a href="index.html">
+                                                                <i class="icofont icofont-home"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="breadcrumb-item"><a href="#!">Form Components</a>
+                                                        </li>
+                                                        <li class="breadcrumb-item"><a href="#!">Form Components</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- Page-header end -->
+
+                                   
+                                            
+
+
+
+                                                                                
+                                                                                <!-- Input Alignment card start -->
+                                                                                <div class="card">
+                                                                                    <div class="card-header">
+                                                                                        <h5>Update Question</h5>
+                                                                                        
+                                                                                        <div class="card-header-right"><i
+                                                                                            class="icofont icofont-spinner-alt-5"></i></div>
+                                                                                        </div>
+                                                                                        <div class="card-block">
+                                                                                            <form id="quizzerForm" method="post" action="{% url 'verify_update' id=q_id.id  %}">
+                                                                                                {% csrf_token %}
+                                                                                               
+                                                                                               
+                                                                                          
+
+                                                                                              
+
+
+                                                                                            <div class="form-group row">
+                                                                                                <label class="col-sm-2 col-form-label">Select Category</label>
+                                                                                                <div class="col-sm-10">
+                                                                                                    <select id="category" name="categoryname" class="form-control">
+                                                                                                        <option value="{{ q_id.category.id }}">{{ q_id.category.category_name }}</option>
+                                                                                                        {% for category in categories %}
+                                                                                                            <option value="{{ category.id }}">{{ category.category_name }}</option>
+                                                                                                        {% endfor %}
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            
+
+                                                                                            <div class="form-group row">
+                                                                                                <label class="col-sm-2 col-form-label">Select Subcategory</label>
+                                                                                                <div class="col-sm-10">
+                                                                                                    <select name="subcategory" class="form-control" id="subcategory-dropdown">
+                                                                                                        {% for sub in subcategories %}
+                                                                                                            <option value="{{ sub.id }}" {% if sub == question_subcategory %}selected{% endif %}>{{ sub.sub_category }}</option>
+                                                                                                        {% endfor %}
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            
+                                                                                           
+
+                                                                                            
+
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Add question</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" name="question" value="{{q_id.question}}" class="form-control form-control">
+                                                                                                        
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">option 1</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" name="option1" value="{{q_id.option1}}" class="form-control form-control">
+                                                                                                        <input type="radio" name="correctAnswer" value="option1" {% if q_id.answer == 'option1' %} checked{% endif %}> Correct
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">option 2</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" name="option2" value="{{q_id.option2}}"
+                                                                                                        class="form-control form-control">
+                                                                                                        
+                                                                                                        <input type="radio" name="correctAnswer" value="option2" {% if q_id.answer == 'option2' %} checked{% endif %}> Correct
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">option 3</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" name="option3" value="{{q_id.option3}}"
+                                                                                                        class="form-control form-control">
+                                                                                                        
+                                                                                                        <input type="radio" name="correctAnswer" value="option3" {% if q_id.answer == 'option3' %} checked{% endif %}> Correct
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                                <input type="hidden" name="qid" value="{{q_id.id}}"
+                                                                                                class="form-control form-control-capitalize">
+
+                                                                                                <input type="hidden" name="updatedby" value="{{user.id}}"
+                                                                                                class="form-control form-control-capitalize">
+
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">updated by</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" name=" " value="{{user.name}}-{{user.roles.role_name}}"
+                                                                                                        class="form-control form-control-capitalize" readonly>
+                                                                                                     </div>
+                                                                                                </div>
+                                        
+                                        
+                                                                                                <button type="submit" class="btn btn-primary btn-round">Update Question</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- Input Alignment card end -->
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- Page body end -->
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Main-body end -->
+                                                                <div id="styleSelector">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+<div class="fixed-button">
+	<a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank" class="btn btn-md btn-primary">
+	  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
+	</a>
+</div>
+                                        <!-- Warning Section Starts -->
+                                        <!-- Older IE warning message -->
+<!--[if lt IE 9]>
+<div class="ie-warning">
+    <h1>Warning!!</h1>
+    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers
+        to access this website.</p>
+    <div class="iew-container">
+        <ul class="iew-download">
+            <li>
+                <a href="http://www.google.com/chrome/">
+                    <img src="assets/images/browser/chrome.png" alt="Chrome">
+                    <div>Chrome</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/">
+                    <img src="assets/images/browser/firefox.png" alt="Firefox">
+                    <div>Firefox</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.opera.com">
+                    <img src="assets/images/browser/opera.png" alt="Opera">
+                    <div>Opera</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/">
+                    <img src="assets/images/browser/safari.png" alt="Safari">
+                    <div>Safari</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                    <img src="assets/images/browser/ie.png" alt="">
+                    <div>IE (9 & above)</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
+<!-- Warning Section Ends -->
+<!-- Required Jquery -->
+<script type="text/javascript" src="{% static 'assets/js/jquery/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery-ui/jquery-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/popper.js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript" src="{% static 'assets/js/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+<!-- modernizr js -->
+<script type="text/javascript" src="{% static 'assets/js/modernizr/modernizr.js' %}"></script>
+<!-- am chart -->
+<script src="{% static 'assets/pages/widget/amchart/amcharts.min.js' %}"></script>
+<script src="{% static 'assets/pages/widget/amchart/serial.min.js' %}"></script>
+<!-- Todo js -->
+<script type="text/javascript " src="{% static 'assets/pages/todo/todo.js' %}"></script>
+<!-- Custom js -->
+<script type="text/javascript" src="{% static 'assets/pages/dashboard/custom-dashboard.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/script.js' %}"></script>
+<script type="text/javascript " src="{% static 'assets/js/SmoothScroll.js' %}"></script>
+<script src="{% static 'assets/js/pcoded.min.js' %}"></script>
+<script src="{% static 'assets/js/demo-12.js' %}"></script>
+<script src="{% static 'assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script>
+var $window = $(window);
+var nav = $('.fixed-button');
+    $window.scroll(function(){
+        if ($window.scrollTop() >= 200) {
+         nav.addClass('active');
+     }
+     else {
+         nav.removeClass('active');
+     }
+ });
+</script>
+<script>
+    document.getElementById("quizzerForm").addEventListener("submit", function(event) {
+        const category = document.querySelector('select[name="categoryname"]');
+       
+        const option1 = document.querySelector('input[name="option1"]').value;
+        const option2 = document.querySelector('input[name="option2"]').value;
+        const option3 = document.querySelector('input[name="option3"]').value;
+        const options = [option1, option2, option3];
+        const uniqueOptions = new Set(options);
+    
+    
+        if (category.value === "") {
+            event.preventDefault();
+            alert("Please select a category.");
+            return;
+        }
+
+    const correctAnswerSelected = document.querySelector('input[name="correctAnswer"]:checked');
+    if (!correctAnswerSelected) {
+        event.preventDefault();
+        alert("Please select the correct answer.");
+    }
+    
+      
+        if (uniqueOptions.size !== options.length) {
+            event.preventDefault();
+            alert("Options must be distinct. Please enter different values.");
+        }
+    });
+    </script>
+
+
+<script type="text/javascript">
+    function updateSubcategories(categoryId) {
+        $.ajax({
+            url: "{% url 'get_subcategories_by_category' %}",  // This is the URL pattern from Django
+            data: {
+                'category_id': categoryId,  // Sending the category ID to the server
+            },
+            success: function(response) {
+                if (response.subcategories) {
+                    // Empty the subcategory dropdown and add default option
+                    $('#subcategory-dropdown').empty();
+                    $('#subcategory-dropdown').append('<option value="">Select Subcategory</option>');
+
+                    // Loop through the response and populate subcategory options
+                    response.subcategories.forEach(function(subcategory) {
+                        var isSelected = subcategory.id == '{{ q_id.subcategory.id }}' ? 'selected' : '';
+                        $('#subcategory-dropdown').append('<option value="' + subcategory.id + '" ' + isSelected + '>' + subcategory.sub_category + '</option>');
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('Error retrieving subcategories: ' + error);  // Handle errors
+            }
+        });
+    }
+
+    // Trigger the subcategory update when category is changed
+    $('#category').change(function() {
+        var selectedCategory = $(this).val();  // Get selected category ID
+        updateSubcategories(selectedCategory);  // Call function to update subcategories
+    });
+</script>
+
+
+
+
+</body>
+
+</html>

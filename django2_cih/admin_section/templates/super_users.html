@@ -1,0 +1,1666 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin- add official users </title>
+    <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content="CodedThemes">
+    <meta name="keywords"
+    content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="author" content="CodedThemes">
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon">
+    <!-- Google font--><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap/css/bootstrap.min.css' %}">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/themify-icons/themify-icons.css' %}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/icofont/css/icofont.css' %}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/jquery.mCustomScrollbar.css' %}">
+
+    <style>
+        .toggle-password {
+            position: absolute;
+        
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            /* color: #aaa; */
+        }
+
+       
+        .toggle-password:hover {
+            color: #bbb9bb;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+            </div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+
+            <nav class="navbar header-navbar pcoded-header">
+                <div class="navbar-wrapper">
+
+                    <div class="navbar-logo">
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="ti-menu"></i>
+                        </a>
+                        <a class="mobile-search morphsearch-search" href="#">
+                            <i class="ti-search"></i>
+                        </a>
+                        <a href="{% url 'index' %}">
+                            <!-- <img class="img-fluid" src="{% static 'assets/images/logo.png' %}" alt="Theme-Logo" /> -->
+                           <h2>ADMIN</h2>
+                        </a>
+                        <a class="mobile-options">
+                            <i class="ti-more"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-left">
+                            <li>
+                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                            </li>
+                            
+                            <li>
+                                <a href="#!" onclick="javascript:toggleFullScreen()">
+                                    <i class="ti-fullscreen"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav-right">
+                            <!-- <li class="header-notification">
+                                <a href="#!">
+                                    <i class="ti-bell"></i>
+                                    <span class="badge bg-c-pink"></span>
+                                </a>
+                                <ul class="show-notification">
+                                    <li>
+                                        <h6>Notifications</h6>
+                                        <label class="label label-danger">New</label>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="{% static 'assets/images/user.png' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">John Doe</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="{% static 'assets/images/user.png' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">Joseph William</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <img class="d-flex align-self-center" src="{% static 'assets/images/user.png' %}" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="notification-user">Sara Soudein</h5>
+                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                <span class="notification-time">30 minutes ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li> -->
+                            <li class="user-profile header-notification">
+                                <a href="">
+                                    <!-- <img src="{% static 'assets/images/avatar-4.jpg' %}" class="img-radius" alt="User-Profile-Image"> -->
+                                    <img src="https://cdn-icons-png.flaticon.com/128/149/149071.png" class="img-radius" alt="User-Profile-Image">
+                                    <span>Account</span>
+                                    <i class="ti-angle-down"></i>
+                                </a>
+                                <ul class="show-notification profile-notification">
+                                    <!-- <li>
+                                        <a href="#!">
+                                            <i class="ti-settings"></i> Settings
+                                        </a>
+                                    </li> -->
+                                    <li>
+                                        <a href="{% url 'profile' %}">
+                                            <i class="ti-user"></i> Profile
+                                        </a>
+                                    </li>
+                                    <!-- <li>
+                                        <a href="#">
+                                            <i class="ti-email"></i> My Messages
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-lock"></i> Lock Screen
+                                        </a>
+                                    </li> -->
+                                    <li>
+                                        <a href="{% url 'adminlogout' %}">
+                                            <i class="ti-layout-sidebar-left"></i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </nav>
+
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                   <header>
+                    {% include 'header.html' %}
+                   </header>
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page-header start -->
+                                    <!-- <div class="page-header card">
+                                        <div class="row align-items-end">
+                                            <div class="col-lg-8">
+                                                <div class="page-header-title">
+                                                    <i class="icofont icofont-file-code bg-c-blue"></i>
+                                                    <div class="d-inline">
+                                                        <h4>Basic Form Inputs</h4>
+                                                        <span>Lorem ipsum dolor sit <code>amet</code>, consectetur adipisicing elit</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="page-header-breadcrumb">
+                                                    <ul class="breadcrumb-title">
+                                                        <li class="breadcrumb-item">
+                                                            <a href="index.html">
+                                                                <i class="icofont icofont-home"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="breadcrumb-item"><a href="#!">Form Components</a>
+                                                        </li>
+                                                        <li class="breadcrumb-item"><a href="#!">Form Components</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- Page-header end -->
+
+                                    <!-- Page body start -->
+                                    <div class="page-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <!-- Basic Form Inputs card start -->
+                                                <!-- <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Basic Form Inputs</h5>
+                                                        <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span> 
+                                                        <div class="card-header-right"><i
+                                                            class="icofont icofont-spinner-alt-5"></i></div>
+
+                                                            <div class="card-header-right">
+                                                                <i class="icofont icofont-spinner-alt-5"></i>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card-block">
+                                                            <h4 class="sub-title">Basic Inputs</h4>
+                                                            <form>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 col-form-label">Simple Input</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 col-form-label">Placeholder</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control"
+                                                                        placeholder="Type your title in Placeholder">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 col-form-label">Password</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="password" class="form-control"
+                                                                        placeholder="Password input">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 col-form-label">Read only</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control"
+                                                                        placeholder="You can't change me" readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 col-form-label">Disable Input</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control"
+                                                                        placeholder="Disabled text" disabled>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 col-form-label">Predefine
+                                                                        Input</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input type="text" class="form-control"
+                                                                            value="Enter yout content after me">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-2 col-form-label">Select Box</label>
+                                                                        <div class="col-sm-10">
+                                                                            <select name="select" class="form-control">
+                                                                                <option value="opt1">Select One Value Only</option>
+                                                                                <option value="opt2">Type 2</option>
+                                                                                <option value="opt3">Type 3</option>
+                                                                                <option value="opt4">Type 4</option>
+                                                                                <option value="opt5">Type 5</option>
+                                                                                <option value="opt6">Type 6</option>
+                                                                                <option value="opt7">Type 7</option>
+                                                                                <option value="opt8">Type 8</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-2 col-form-label">Round Input</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input type="text"
+                                                                            class="form-control form-control-round"
+                                                                            placeholder=".form-control-round">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-2 col-form-label">Maximum
+                                                                            Length</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text" class="form-control"
+                                                                                placeholder="Content must be in 6 characters"
+                                                                                maxlength="6">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-2 col-form-label">Disable
+                                                                                Autocomplete</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="Autocomplete Off"
+                                                                                    autocomplete="off">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-2 col-form-label">Static Text</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <div class="form-control-static">Hello !... This is
+                                                                                        static text
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-2 col-form-label">Color</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <input type="color" class="form-control">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-2 col-form-label">Upload File</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <input type="file" class="form-control">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-2 col-form-label">Textarea</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <textarea rows="5" cols="5" class="form-control"
+                                                                                    placeholder="Default textarea"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-6">
+                                                                                <h4 class="sub-title">Input Sizes</h4>
+                                                                                <form>
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-sm-12">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-control-lg"
+                                                                                            placeholder=".form-control-lg">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control"
+                                                                                            placeholder=".form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-sm-8">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-control-sm"
+                                                                                            placeholder=".form-control-sm">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                            <div class="col-sm-6 mobile-inputs">
+                                                                                <h4 class="sub-title">Color Inputs</h4>
+                                                                                <form>
+                                                                                    <div class="form-group">
+                                                                                        <input type="text"
+                                                                                        class="form-control form-control-primary"
+                                                                                        placeholder=".form-control-primary">
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-control-warning"
+                                                                                            placeholder=".form-control-warning">
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-control-default"
+                                                                                            placeholder=".form-control-default">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-control-danger"
+                                                                                            placeholder=".form-control-danger">
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-control-success"
+                                                                                            placeholder=".form-control-success">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-control-inverse"
+                                                                                            placeholder=".form-control-inverse">
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-control-info"
+                                                                                            placeholder=".form-control-info">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-6 mobile-inputs">
+                                                                                <h4 class="sub-title">Text-color</h4>
+                                                                                <form>
+                                                                                    <div class="form-group">
+                                                                                        <input type="text"
+                                                                                        class="form-control form-txt-primary"
+                                                                                        placeholder=".form-txt-primary">
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-txt-warning"
+                                                                                            placeholder=".form-txt-warning">
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-txt-default"
+                                                                                            placeholder=".form-txt-default">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-txt-danger"
+                                                                                            placeholder=".form-txt-danger">
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-txt-success"
+                                                                                            placeholder=".form-txt-success">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-txt-inverse"
+                                                                                            placeholder=".form-txt-inverse">
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-txt-info"
+                                                                                            placeholder=".form-txt-info">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                            <div class="col-sm-6 mobile-inputs">
+                                                                                <h4 class="sub-title">Background-color</h4>
+                                                                                <form>
+                                                                                    <div class="form-group">
+                                                                                        <input type="text"
+                                                                                        class="form-control form-bg-primary"
+                                                                                        placeholder=".form-bg-primary">
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-bg-warning"
+                                                                                            placeholder=".form-bg-warning">
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-bg-default"
+                                                                                            placeholder=".form-bg-default">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-bg-danger"
+                                                                                            placeholder=".form-bg-danger">
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-bg-success"
+                                                                                            placeholder=".form-bg-success">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-bg-inverse"
+                                                                                            placeholder=".form-bg-inverse">
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="text"
+                                                                                            class="form-control form-bg-info"
+                                                                                            placeholder=".form-bg-info">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
+                                                                <!-- Basic Form Inputs card end -->
+                                                                <!-- Input Grid card start -->
+                                                                <!-- <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h5>Input Grid</h5>
+                                                                        <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
+                                                                        
+                                                                    </div>
+                                                                    <div class="card-block">
+                                                                        <h4 class="sub-title">Basic Inputs</h4>
+                                                                        <form>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-sm-1">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-1">
+                                                                                </div>
+                                                                                <div class="col-sm-11">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-11">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-sm-2">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-2">
+                                                                                </div>
+                                                                                <div class="col-sm-10">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-10">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-sm-3">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-3">
+                                                                                </div>
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-9">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-sm-4">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-4">
+                                                                                </div>
+                                                                                <div class="col-sm-8">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-8">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-sm-5">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-5">
+                                                                                </div>
+                                                                                <div class="col-sm-7">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-7">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-6">
+                                                                                </div>
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-6">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-sm-12">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-12">
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                        <h4 class="sub-title">Flex Inputs</h4>
+                                                                        <form>
+                                                                            <div class="form-group row">
+                                                                                <div class="col">
+                                                                                    <input type="text" class="form-control" placeholder="col">
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-4">
+                                                                                </div>
+                                                                                <div class="col">
+                                                                                    <input type="text" class="form-control" placeholder="col">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col">
+                                                                                    <input type="text" class="form-control" placeholder="col">
+                                                                                </div>
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-6">
+                                                                                </div>
+                                                                                <div class="col">
+                                                                                    <input type="text" class="form-control" placeholder="col">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-sm-8">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-8">
+                                                                                </div>
+                                                                                <div class="col">
+                                                                                    <input type="text" class="form-control" placeholder="col">
+                                                                                </div>
+                                                                                <div class="col">
+                                                                                    <input type="text" class="form-control" placeholder="col">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col">
+                                                                                    <input type="text" class="form-control" placeholder="col">
+                                                                                </div>
+                                                                                <div class="col-sm-10">
+                                                                                    <input type="text" class="form-control"
+                                                                                    placeholder="col-sm-10">
+                                                                                </div>
+                                                                                <div class="col">
+                                                                                    <input type="text" class="form-control" placeholder="col">
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div> -->
+                                                                <!-- Input Grid card end -->
+                                                                <!-- Input Validation card start -->
+                                                                <!-- <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h5>Input Validation</h5>
+                                                                        <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
+                                                                        <div class="card-header-right"><i
+                                                                            class="icofont icofont-spinner-alt-5"></i></div>
+                                                                        </div>
+                                                                        <div class="card-block">
+                                                                            <h4 class="sub-title">Input Validation</h4>
+                                                                            <div class="form-group has-success row">
+                                                                                <div class="col-sm-2">
+                                                                                    <label class="col-form-label" for="inputSuccess1">Input with
+                                                                                        success</label>
+                                                                                    </div>
+                                                                                    <div class="col-sm-10">
+                                                                                        <input type="text" class="form-control form-control-success"
+                                                                                        id="inputSuccess1">
+                                                                                        <div class="col-form-label">Success! You've done it.</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group has-warning row">
+                                                                                    <div class="col-sm-2">
+                                                                                        <label class="col-form-label" for="inputWarning1">Input with
+                                                                                            warning</label>
+                                                                                        </div>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text" class="form-control form-control-warning"
+                                                                                            id="inputWarning1">
+                                                                                            <div class="col-form-label">Shucks, check the formatting of that
+                                                                                                and try again.
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group has-danger row">
+                                                                                        <div class="col-sm-2">
+                                                                                            <label class="col-form-label" for="inputDanger1">Input with
+                                                                                                danger</label>
+                                                                                            </div>
+                                                                                            <div class="col-sm-10">
+                                                                                                <input type="text" class="form-control form-control-danger"
+                                                                                                id="inputDanger1">
+                                                                                                <div class="col-form-label">Sorry, that username's taken. Try
+                                                                                                    another?
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> -->
+                                                                                <!-- Input Validation card end -->
+                                                                                <div class="col-lg-12 col-xl-12">
+                                                                                    <div class="sub-title">Test Results</div>
+                                                                                    <!-- Nav tabs -->
+                                                                                    <ul class="nav nav-tabs  tabs" role="tablist">
+                                                                                        <li class="nav-item">
+                                                                                            <a class="nav-link active" data-toggle="tab" href="#user" role="tab">Official Users</a>
+                                                                                        </li>
+                                                                                        <li class="nav-item">
+                                                                                            <a class="nav-link" data-toggle="tab" href="#organisation" role="tab">Organisation</a>
+                                                                                        </li>
+                                                                                        
+                                                                                        <!-- <li class="nav-item">
+                                                                                            <a class="nav-link" data-toggle="tab" href="#settings1" role="tab">Settings</a>
+                                                                                        </li> -->
+                                                                                    </ul>
+                                                                                    <!-- Tab panes -->
+                                                                                    <div class="tab-content tabs card-block">
+                                                                                        <div class="tab-pane active" id="user" role="tabpanel">
+                                            
+                                                                                           <!-- demo test start -->
+                                                                                           <div class="card">
+                                                                                              
+                                                                                            <div class="container">
+                                                                                                
+                                            
+                                                                                                      <div class="card-block">
+                                                                                                
+                                                                                                    <div class="card">
+                                                                                                        
+                                                                                                        <div class="card-block">
+
+                                                                                                            <form method="POST" action="{% url 'superusers' %}" onsubmit="return validateForm();">
+                                                                                                                {% csrf_token %}
+                
+                                                                                                                {% if messages %}
+                                                                                                                <div class="alert alert-success" role="alert">
+                                                                                                                    {% for message in messages %}
+                                                                                                                        {{ message }}
+                                                                                                                    {% endfor %}
+                                                                                                                </div>
+                                                                                                            {% endif %}
+                
+                
+                
+                                                                                                            
+                                                                                            
+                                                                                                            
+                                                                                                                    <div class="form-group row">
+                                                                                                                    <label class="col-sm-2 col-form-label">Name</label>
+                                                                                                                    <div class="col-sm-10">
+                                                                                                                        <input type="text" name="name" id="name"
+                                                                                                                        placeholder="Enter your name." class="form-control form-control-normal">
+                                                                                                                        
+                                                                                                                    </div>
+                                                                                                                </div>
+                
+                                                                                                                <div class="form-group row">
+                                                                                                                    <label class="col-sm-2 col-form-label">Username</label>
+                                                                                                                    <div class="col-sm-10">
+                                                                                                                        <input type="text" name="uname" id="uname"
+                                                                                                                        placeholder="Enter your username." class="form-control form-control-normal">
+                                                                                                                        
+                                                                                                                    </div>
+                                                                                                                </div>
+                
+                                                                                                                <div class="form-group row">
+                                                                                                                    <label class="col-sm-2 col-form-label">Gender</label>
+                                                                                                                    <div class="col-sm-10">
+                                                                                                                        <input type="radio" name="gender" id="gender" value="male" class=""
+                                                                                                                        >&nbsp;&nbsp;Male &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                                        <input type="radio" name="gender" id="gender" value="female" class=""
+                                                                                                                        >&nbsp;&nbsp;Female&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                                        <input type="radio" name="gender" id="gender" value="others" class=""
+                                                                                                                        >&nbsp;&nbsp;Others&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                                        <input type="radio" name="gender" id="gender" value="prefer_not_to_say" class=""
+                                                                                                                        >&nbsp;&nbsp;Prefer not to say
+                                                                                                                    </div>
+                                                                                                                </div>
+                
+                                                                                                                <div class="form-group row">
+                                                                                                                    <label class="col-sm-2 col-form-label">Date of Birth</label>
+                                                                                                                    <div class="col-sm-10">
+                                                                                                                        <input type="date" name="dob" id="dob" class="form-control form-control"
+                                                                                                                        placeholder="">
+                                
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div class="form-group row">
+                                                                                                                    <label class="col-sm-2 col-form-label">Email Address</label>
+                                                                                                                    <div class="col-sm-10">
+                                                                                                                        <input type="text" name="email" id="email" class="form-control form-control"
+                                                                                                                        placeholder="Enter your email address.">
+                                                                                                                        <span id="email-error" style="color: red; display: none;">This email is already taken.</span>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div class="form-group row">
+                                                                                                                    <label class="col-sm-2 col-form-label">Phone Number</label>
+                                                                                                                    <div class="col-sm-10">
+                                                                                                                        <input type="text"
+                                                                                                                        id="phone" name="phone"
+                                                                                                                        class="form-control form-control" placeholder="Enter your phone number."
+                                                                                                                        required pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number.">
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div class="form-group row">
+                                                                                                                <label for="category" class="col-sm-2 col-form-label">Select Role</label>
+                                                                                                                <div class="col-sm-10">
+                                                                                                    <!-- <select id="roles" name="roles"  class="form-control" >
+                                                                                                        <option value="">Select your role</option>  
+                                                                                                        { % for cat in roled % }
+                                                                                                            <option value="{{ cat.id }}">
+                                                                                                                {{ cat.role_name }}
+                                                                                                            </option>
+                                                                                                        
+                                                                                                        { % endfor % }
+                                                                                                      
+                                                                                                    </select> -->
+                                                                                                    <select id="roles" name="roles" class="form-control">
+                                                                                                        <option value="">Select your role</option>
+                                                                                                        {% for cat in roled %}
+                                                                                                            <option value="{{ cat.id }}">{{ cat.role_name }}</option>
+                                                                                                        {% endfor %}
+                                                                                                    </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Password</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="password" placeholder="Enter your password." class="form-control" name="password" id="password">
+                                                                                                        <button type="button" class="toggle-password" data-target="#password">Show</button>
+                                                                                                    </div>                
+                                                                                                </div>
+                                                                                                
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Confirm Password</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="password" placeholder="Confirm your password." class="form-control" name="confirmpassword" id="confirmpassword">
+                                                                                                        <button type="button" class="toggle-password" data-target="#confirmpassword">Show</button>
+                                                                                                    </div>                
+                                                                                                </div>    
+                                                                                               
+                                                                                                               
+                                                                                                                <button type="submit" id="submit-button" class="btn btn-primary btn-round">Register Now</button>
+                                                                                                            </form>
+                                                                                                        </div>
+                                                                                                    </div>
+                                            
+                                                                                                   
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                             </div>
+                                                                                      <!--  end --> 
+                                            
+                                            
+                                                                                        </div>
+                                            
+                                                                                        <div class="tab-pane" id="organisation" role="tabpanel">
+                                                                                          
+                                                                                              <!--  start -->
+                                                                                              <div class="card">
+                                                                                                
+                                                                                                <div class="container">
+                                                
+                                                                                                          <div class="card-block">
+                                                                                                                                    
+                                            
+                                                                                                            <div class="card-block">
+
+                                                                                                                <form  id="organisation-form"  method="POST" action="{% url 'superusers' %}"  onsubmit="return validateOrganisationForm() && validatePasswordFields();" >
+                                                                                                                    {% csrf_token %}
+                    
+                                                                                                                    {% if messages %}
+                                                                                                                    <div class="alert alert-success" role="alert">
+                                                                                                                        {% for message in messages %}
+                                                                                                                            {{ message }}
+                                                                                                                        {% endfor %}
+                                                                                                                    </div>
+                                                                                                                {% endif %}
+                    
+                    
+                    
+                                                                                                                
+                                                                                                
+                                                                                                                
+                                                                                                                        <div class="form-group row">
+                                                                                                                        <label class="col-sm-2 col-form-label">Company Name</label>
+                                                                                                                        <div class="col-sm-10">
+                                                                                                                            <input type="text" name="name" id="cname"
+                                                                                                                            placeholder="Enter your company name." class="form-control form-control-normal">
+                                                                                                                            
+                                                                                                                        </div>
+                                                                                                                    </div>
+                    
+                                                                                                                    <div class="form-group row">
+                                                                                                                        <label class="col-sm-2 col-form-label">Username</label>
+                                                                                                                        <div class="col-sm-10">
+                                                                                                                            <input type="text" name="uname" id="cuname"
+                                                                                                                            placeholder="Enter your username." class="form-control form-control-normal" >
+                                                                                                                            
+                                                                                                                        </div>
+                                                                                                                    </div>
+                    
+                                                                                                                    <div class="form-group row">
+                                                                                                                        <!-- <label class="col-sm-2 col-form-label">Gender</label> -->
+                                                                                                                        <div class="col-sm-10">
+                                                                                                                            <input type="hide" name="gender" id="cgender" value="organisation" class=""
+                                                                                                                            hidden>
+                                                                                                                            <!-- &nbsp;&nbsp;Oragnisation &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                                                                                                                          
+                                                                                                                        </div>
+                                                                                                                    </div>
+                    
+                                                                                                                    <div class="form-group row">
+                                                                                                                        <label class="col-sm-2 col-form-label">Date Of Incorperation</label>
+                                                                                                                        <div class="col-sm-10">
+                                                                                                                            <input type="date" name="dob" id="cdob" class="form-control form-control"
+                                                                                                                            placeholder="" >
+                                    
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                    <div class="form-group row">
+                                                                                                                        <label class="col-sm-2 col-form-label">Email Address</label>
+                                                                                                                        <div class="col-sm-10">
+                                                                                                                            <input type="text" name="email" id="cemail" class="form-control form-control"
+                                                                                                                            placeholder="Enter your email address." >
+                                                                                                                            <span id="email-error" style="color: red; display: none;">This email is already taken.</span>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                    <div class="form-group row">
+                                                                                                                        <label class="col-sm-2 col-form-label">Phone Number</label>
+                                                                                                                        <div class="col-sm-10">
+                                                                                                                            <input type="text"
+                                                                                                                            id="ccphone" name="phone"
+                                                                                                                            class="form-control form-control" placeholder="Enter your phone number."
+                                                                                                                            required pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number.">
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                    <div class="form-group row">
+                                                                                                                    <label for="category" class="col-sm-2 col-form-label">Role</label>
+                                                                                                                    <div class="col-sm-10">
+                                                                                                        <!-- <select id="croles" name="roles"  class="form-control" >
+                                                                                                            <option value="33">Employer</option>   -->
+                                                                                                            <select id="croles" name="roles" class="form-control">
+                                                                                                                <option value="33">Employer</option>
+                                                                                                                {% for role in roles %}
+                                                                                                                    <option value="{{ role.id }}">{{ role.role_name }}</option>
+                                                                                                                {% endfor %}
+                                                                                                            </select>
+                                                                                                                
+                                                                                                            
+                                                                                                           
+                                                                                                          
+                                                                                                        <!-- </select> -->
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <!-- Password Field -->
+<!-- Password Field -->
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+        <input type="password" name="password" id="cpassword" class="form-control" placeholder="Enter your password.">
+        <button type="button" id="toggle-password" class="toggle-password" onclick="togglePasswordVisibility('cpassword', 'toggle-password')">Show</button>
+    </div>
+</div>
+
+<!-- Confirm Password Field -->
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Confirm Password</label>
+    <div class="col-sm-10">
+        <input type="password" name="confirmpassword" id="cconfirmpassword" class="form-control" placeholder="Confirm your password.">
+        <button type="button" id="toggle-confirmpassword" class="toggle-password" onclick="togglePasswordVisibility('cconfirmpassword', 'toggle-confirmpassword')">Show</button>
+    </div>
+</div>
+
+
+                                                                                                   
+                                                                                                               
+                                                                                                                    <button type="submit" id="submit-button" class="btn btn-primary btn-round">Register Now</button>
+                                                                                                                </form>
+                                                                                                            </div>
+                                            
+                                                                                                       
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                   </div> 
+                                                                                                                    <!-- mock test end -->
+                                                                                        </div>
+                                                                                        <div class="tab-pane" id="aptitude" role="tabpanel">
+                                                                                            <div class="card">
+                                                                                                
+                                                                                                <div class="container">
+                                                
+                                                                                                          <div class="card-block">
+                                                                                                                                    
+                                            
+                                                                                     
+                                            
+                                                                                                       
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                      </div> 
+                                                                                        </div>
+                                                                                        <!-- <div class="tab-pane" id="settings1" role="tabpanel">
+                                                                                            <p class="m-0">4.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                                                                                        </div> -->
+                                                                                    </div>
+                                                                                </div>
+                                                                               
+
+                                                                                <!-- Input Alignment card start -->
+                                                                                <!-- <div class="card">
+                                                                                    <div class="card-header">
+                                                                                        <h5>Register Users</h5>
+                                                                                        <!-- <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span> -->
+                                                                                        <!-- <div class="card-header-right"><i
+                                                                                            class="icofont icofont-spinner-alt-5"></i></div>
+                                                                                        </div>
+                                                                                        <div class="card-block">
+
+                                                                                            <form method="POST" action="{% url 'superusers' %}" onsubmit="return validateForm();">
+                                                                                                {% csrf_token %}
+
+                                                                                                {% if messages %}
+                                                                                                <div class="alert alert-success" role="alert">
+                                                                                                    {% for message in messages %}
+                                                                                                        {{ message }}
+                                                                                                    {% endfor %}
+                                                                                                </div>
+                                                                                            {% endif %}
+
+
+
+                                                                                            
+                                                                            
+                                                                                            
+                                                                                                    <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Name</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" name="name" id="name"
+                                                                                                        placeholder="Enter your name." class="form-control form-control-normal">
+                                                                                                        
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Username</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" name="uname" id="uname"
+                                                                                                        placeholder="Enter your username." class="form-control form-control-normal">
+                                                                                                        
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Gender</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="radio" name="gender" id="gender" value="male" class=""
+                                                                                                        >&nbsp;&nbsp;Male &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                        <input type="radio" name="gender" id="gender" value="female" class=""
+                                                                                                        >&nbsp;&nbsp;Female&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                        <input type="radio" name="gender" id="gender" value="others" class=""
+                                                                                                        >&nbsp;&nbsp;Others&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                        <input type="radio" name="gender" id="gender" value="prefer_not_to_say" class=""
+                                                                                                        >&nbsp;&nbsp;Prefer not to say
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Date of Birth</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="date" name="dob" id="dob" class="form-control form-control"
+                                                                                                        placeholder="">
+                
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Email Address</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" name="email" id="email" class="form-control form-control"
+                                                                                                        placeholder="Enter your email address.">
+                                                                                                        <span id="email-error" style="color: red; display: none;">This email is already taken.</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Phone Number</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text"
+                                                                                                        id="phone" name="phone"
+                                                                                                        class="form-control form-control" placeholder="Enter your phone number."
+                                                                                                        required pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number.">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                <label for="category" class="col-sm-2 col-form-label">Select Role</label>
+                                                                                                <div class="col-sm-10">
+                                                                                    <select id="roles" name="roles"  class="form-control" >
+                                                                                        <option value="">Select your role</option>  
+                                                                                        {% for cat in roled %}
+                                                                                            <option value="{{ cat.id }}">
+                                                                                                {{ cat.role_name }}
+                                                                                            </option>
+                                                                                        
+                                                                                        {% endfor %}
+                                                                                      
+                                                                                    </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label class="col-sm-2 col-form-label">Password</label>
+                                                                                    <div class="col-sm-10">
+                                                                                        <input type="password" placeholder="Enter your password." class="form-control" name="password" id="password">
+                                                                                        <button type="button" class="toggle-password" data-target="#password">Show</button>
+                                                                                    </div>                
+                                                                                </div>
+                                                                                
+                                                                                <div class="form-group row">
+                                                                                    <label class="col-sm-2 col-form-label">Confirm Password</label>
+                                                                                    <div class="col-sm-10">
+                                                                                        <input type="password" placeholder="Confirm your password." class="form-control" name="confirmpassword" id="confirmpassword">
+                                                                                        <button type="button" class="toggle-password" data-target="#confirmpassword">Show</button>
+                                                                                    </div>                
+                                                                                </div>     -->
+                                                                               
+                                                                                                 <!-- <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Added on</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" id="addedon" name="addedon"
+                                                                                                        class="form-control form-control-"
+                                                                                                        placeholder=".form-control-lowercase">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Added by</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" class="form-control form-control-variant"
+                                                                                                        id="addedby" name="addedby" value="1">
+                                                                                                    </div>
+                                                                                                </div> -->
+                                                                                                <!--<div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Left-Align Text</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" class="form-control form-control-left"
+                                                                                                        placeholder=".form-control-left">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Center-Align Text</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" class="form-control form-control-center"
+                                                                                                        placeholder=".form-control-center">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">Right-Align Text</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" class="form-control form-control-right"
+                                                                                                        placeholder=".form-control-right">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label class="col-sm-2 col-form-label">RTL Text</label>
+                                                                                                    <div class="col-sm-10">
+                                                                                                        <input type="text" class="form-control form-control-rtl"
+                                                                                                        placeholder=".form-control-rtl">
+                                                                                                    </div>
+                                                                                                </div> -->
+                                                                                                <!-- <button type="submit" id="submit-button" class="btn btn-primary btn-round">Register Now</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    </div> --> 
+                                                                                    <!-- Input Alignment card end -->
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- Page body end -->
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Main-body end -->
+                                                                <div id="styleSelector">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+<div class="fixed-button">
+	<a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank" class="btn btn-md btn-primary">
+	  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
+	</a>
+</div>
+                                        <!-- Warning Section Starts -->
+                                        <!-- Older IE warning message -->
+<!--[if lt IE 9]>
+<div class="ie-warning">
+    <h1>Warning!!</h1>
+    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers
+        to access this website.</p>
+    <div class="iew-container">
+        <ul class="iew-download">
+            <li>
+                <a href="http://www.google.com/chrome/">
+                    <img src="assets/images/browser/chrome.png" alt="Chrome">
+                    <div>Chrome</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/">
+                    <img src="assets/images/browser/firefox.png" alt="Firefox">
+                    <div>Firefox</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.opera.com">
+                    <img src="assets/images/browser/opera.png" alt="Opera">
+                    <div>Opera</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/">
+                    <img src="assets/images/browser/safari.png" alt="Safari">
+                    <div>Safari</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                    <img src="assets/images/browser/ie.png" alt="">
+                    <div>IE (9 & above)</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
+<!-- Warning Section Ends -->
+<!-- Required Jquery -->
+<script type="text/javascript" src="{% static 'assets/js/jquery/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery-ui/jquery-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/popper.js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript" src="{% static 'assets/js/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+<!-- modernizr js -->
+<script type="text/javascript" src="{% static 'assets/js/modernizr/modernizr.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/modernizr/css-scrollbars.js' %}"></script>
+<!-- classie js -->
+<script type="text/javascript" src="{% static 'assets/js/classie/classie.js' %}"></script>
+<!-- Custom js -->
+<script type="text/javascript" src="{% static 'assets/js/script.js' %}"></script>
+<script src="{% static 'assets/js/pcoded.min.js' %}"></script>
+<script src="{% static 'assets/js/demo-12.js' %}"></script>
+<script src="{% static 'assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+        <script>
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const username = document.getElementById('uname').value;
+            const gender = document.querySelector('input[name="gender"]:checked');
+            const dob = document.getElementById('dob').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const roles = document.getElementById('roles').value;
+            const password = document.getElementById("password").value;
+            const confirmpassword = document.getElementById('confirmpassword').value;
+            
+            if (name.trim() === "") {
+                alert("Name is required.");
+                return false;
+            }
+            
+            if (username.trim() === "") {
+                alert("Please enter your username.");
+                return false;
+            }
+    
+           
+            if (/\s/.test(username)) {
+                alert("Username should not contain any spaces.");
+                return false;
+            }
+    
+            
+            if (!gender) {
+                alert("Please select your gender.");
+                return false;
+            }
+    
+            
+            if (dob === "") {
+                alert("Please select your date of birth.");
+                return false;
+            }
+    
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            const phonePattern = /^[0-9]{10}$/; 
+            if (!phonePattern.test(phone)) {
+                alert("Please enter a valid phone number (10 digits).");
+                return false;
+            }
+
+            if (roles === "") {
+                alert("Please select your role.");
+                return false;
+            }
+
+            const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{6,}$/; 
+            if (!passwordPattern.test(password)) {
+                alert("Password must be at least 6 characters long  include alphabets, one number and one special character.");
+                return false;
+            }
+
+            if (password !== confirmpassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+    </script>
+
+<!-- Form content here -->
+<!-- 
+<script>
+  // Organisation Form Validation Function
+function validateOrganisationForm() {
+    return validateCompanyName() && validateUsername() && validateDob() && validateEmail() && validatePhone() && validateRole()
+}
+
+// Validate Company Name
+function validateCompanyName() {
+    const name = document.getElementById('cname').value;
+    if (name.trim() === "") {
+        alert("Company name is required.");
+        return false;
+    }
+    return true;
+}
+
+// Validate Username
+function validateUsername() {
+    const username = document.getElementById('cuname').value;
+    if (username.trim() === "") {
+        alert("Please enter your username.");
+        return false;
+    }
+    if (/\s/.test(username)) {
+        alert("Username should not contain spaces.");
+        return false;
+    }
+    return true;
+}
+
+// Validate Date of Incorporation
+function validateDob() {
+    const dob = document.getElementById('cdob').value;
+    if (dob === "") {
+        alert("Please select the date of incorporation.");
+        return false;
+    }
+    return true;
+}
+
+// Validate Email Address
+function validateEmail() {
+    const email = document.getElementById('cemail').value;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+    }
+    return true;
+}
+
+// Validate Phone Number
+function validatePhone() {
+    const phone = document.getElementById('cphone').value;
+    const phonePattern = /^[0-9]{10}$/; 
+    if (!phonePattern.test(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return false;
+    }
+    return true;
+}
+
+// Validate Role Selection
+function validateRole() {
+    const role = document.getElementById('croles').value;
+    if (role === "") {
+        alert("Please select a role.");
+        return false;
+    }
+    return true;
+}
+
+
+
+</script>
+
+
+<script>
+// Validate Password Field
+function validatePassword() {
+    const password = document.getElementById('cpassword').value;
+    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{6,}$/; // At least 6 chars, letters, number, and special char
+    
+    // Check if password is empty
+    if (password.trim() === "") {
+        alert("Password is required.");
+        return false;
+    }
+
+    // Check if password meets the pattern (at least 6 characters, 1 letter, 1 number, and 1 special character)
+    if (!passwordPattern.test(password)) {
+        alert("Password must be at least 6 characters long, including letters, one number, and one special character.");
+        return false;
+    }
+
+    return true;
+}
+
+// Validate Confirm Password Field
+function validateConfirmPassword() {
+    const password = document.getElementById('cpassword').value;
+    const confirmPassword = document.getElementById('cconfirmpassword').value;
+
+    // Check if confirm password is empty
+    if (confirmPassword.trim() === "") {
+        alert("Please confirm your password.");
+        return false;
+    }
+
+    // Check if confirm password matches password
+    if (confirmPassword !== password) {
+        alert("Passwords do not match.");
+        return false;
+    }
+
+    return true;
+}
+
+// Combined Password and Confirm Password Validation
+function validatePasswordFields() {
+    const passwordValid = validatePassword();  // Calls validatePassword() function
+    const confirmPasswordValid = validateConfirmPassword();  // Calls validateConfirmPassword() function
+
+    return passwordValid && confirmPasswordValid;  // Ensures both fields are valid
+}
+
+
+</script> -->
+
+<script>
+
+// Organisation Form Validation Function
+function validateOrganisationForm() {
+    return validateCompanyName() && validateUsername() && validateDob() && validateEmail() && validatePhone() && validateRole();
+}
+
+// Password and Confirm Password Validation
+function validatePasswordFields() {
+    const passwordValid = validatePassword();  // Calls validatePassword() function
+    const confirmPasswordValid = validateConfirmPassword();  // Calls validateConfirmPassword() function
+
+    return passwordValid && confirmPasswordValid;  // Ensures both fields are valid
+}
+
+// Validate Password Field
+function validatePassword() {
+    const password = document.getElementById('cpassword').value;
+    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{6,}$/; // At least 6 chars, letters, number, and special char
+
+    if (password.trim() === "") {
+        alert("Password is required.");
+        return false;
+    }
+
+    if (!passwordPattern.test(password)) {
+        alert("Password must be at least 6 characters long, including letters, one number, and one special character.");
+        return false;
+    }
+
+    return true;
+}
+
+// Validate Confirm Password Field
+function validateConfirmPassword() {
+    const password = document.getElementById('cpassword').value;
+    const confirmPassword = document.getElementById('cconfirmpassword').value;
+
+    if (confirmPassword.trim() === "") {
+        alert("Please confirm your password.");
+        return false;
+    }
+
+    if (confirmPassword !== password) {
+        alert("Passwords do not match.");
+        return false;
+    }
+
+    return true;
+}
+
+// Validate Company Name
+function validateCompanyName() {
+    const name = document.getElementById('cname').value;
+    if (name.trim() === "") {
+        alert("Company name is required.");
+        return false;
+    }
+    return true;
+}
+
+// Validate Username
+function validateUsername() {
+    const username = document.getElementById('cuname').value;
+    if (username.trim() === "") {
+        alert("Please enter your username.");
+        return false;
+    }
+    if (/\s/.test(username)) {
+        alert("Username should not contain spaces.");
+        return false;
+    }
+    return true;
+}
+
+// Validate Date of Incorporation
+function validateDob() {
+    const dob = document.getElementById('cdob').value;
+    if (dob === "") {
+        alert("Please select the date of incorporation.");
+        return false;
+    }
+    return true;
+}
+
+// Validate Email Address
+function validateEmail() {
+    const email = document.getElementById('cemail').value;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+    }
+    return true;
+}
+
+// Validate Phone Number
+function validatePhone() {
+    const phone = document.getElementById('ccphone').value;
+    const phonePattern = /^[0-9]{10}$/;
+    if (!phonePattern.test(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return false;
+    }
+    return true;
+}
+
+// Validate Role Selection
+function validateRole() {
+    const role = document.getElementById('croles').value;
+    if (role === "") {
+        alert("Please select a role.");
+        return false;
+    }
+    return true;
+}
+
+// Toggle Password Visibility
+function togglePasswordVisibility(inputId, buttonId) {
+    const passwordInput = document.getElementById(inputId);
+    const button = document.getElementById(buttonId);
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        button.textContent = "Hide";
+    } else {
+        passwordInput.type = "password";
+        button.textContent = "Show";
+    }
+}
+</script>
+
+<script>
+   $(".toggle-password").click(function() {
+    var input = $($(this).data("target"));  
+    
+    if (input.attr("type") == "password") {
+        input.attr("type", "text");
+        $(this).text("Hide");
+    } else {
+        input.attr("type", "password");
+        $(this).text("Show");
+    }
+});
+
+</script>
+
+
+   <script>
+ 
+     $(document).ready(function() {
+    $("#email").on('input', function() {
+        var email = $(this).val();
+
+        if (email) {
+            $.ajax({
+                url: "{% url 'super_check_email' %}", 
+                type: "GET",
+                data: { email: email }, 
+                success: function(response) {
+                    if (response.exists) {
+                        $("#email-error").show();  
+                    } else {
+                        $("#email-error").hide(); 
+                    }
+                },
+                error: function(xhr, errmsg, err) {
+                    console.log("Error: " + errmsg);
+                }
+            });
+        } else {
+            $("#email-error").hide();  
+        }
+    });
+
+    
+    $("form").submit(function(event) {
+        if ($("#email-error").is(":visible")) {
+            event.preventDefault();  
+            alert("Please fix the email error before submitting.");
+        }
+    });
+});
+
+
+   </script>
+</body> 
+
+</html>

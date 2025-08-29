@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Details</title>
+    <style>
+      /* General Styling */
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+          
+      }
+      /* .tab-container {
+          display: flex;
+          justify-content: space-around;
+          background-color: #92bce3;
+          color: rgb(16, 14, 14);
+      }
+      .tab {
+          padding: 14px 20px;
+          cursor: pointer;
+          text-align: center;
+      }
+      .tab:hover {
+          background-color: #ddd;
+          color: black;
+      }
+      .tab.active {
+          background-color: #22a0df;
+          color: white;
+      } */
+
+      /* Tab Content Styling */
+      /* .tab-content {
+          display: none;
+          padding: 20px;
+          background-color: white;
+          border: 1px solid #ddd;
+          margin-top: 10px;
+      }
+      .tab-content.active {
+          display: block;
+      } */
+
+      /* Responsive Table */
+      .table-responsive {
+        
+          width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+      }
+      table {
+          width: 80%;
+          border-collapse: collapse;
+          margin: 0 auto;
+         
+      }
+      th, td {
+          padding: 8px 12px;
+          text-align: left;
+          border: 1px solid #bcdcf7;
+      }
+      th {
+          background-color: #367cbc;
+      }
+      tr:nth-child(even) {
+          background-color: #e1eaef;
+      }
+
+      @media screen and (max-width: 600px) {
+          table {
+              border: 0;
+          }
+          table thead {
+              display: none;
+          }
+          table tr {
+              display: block;
+              margin-bottom: 10px;
+          }
+          table td {
+              display: block;
+              text-align: right;
+              padding: 10px;
+              position: relative;
+          }
+          table td:before {
+              content: attr(data-label);
+              position: absolute;
+              left: 0;
+              top: 10px;
+              font-weight: bold;
+          }
+      }
+
+      tbody {
+tr {
+  &:hover {
+    background-color: rgba(19, 163, 189, 0.3);
+  }
+}
+}
+
+
+/* Highlight correct answers */
+.correct-answer {
+            background-color: #369c5b !important; /* Green background */
+            color: white;
+        }
+
+
+
+
+
+
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .form-container {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            margin-left: 150px;
+        }
+
+        .form-group {
+            /* display: flex;
+            align-items: center; */
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            flex: 0 0 30%; /* Label takes 30% of the width */
+            font-weight: bold;
+            background-color: #007BFF; /* Blue background */
+            color: white; /* White text */
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .form-group .form-control {
+            flex: 1; /* Input field takes the remaining space */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+</style>
+</head>
+<body>
+   <header>
+    {% include 'navbar.html' %}
+   </header>
+
+  
+
+          <div class="table-container">
+            <table>
+              <div class="form-container">
+                <div class="form-group">
+                    <label for="name"><i class="icofont icofont">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{user.name}}" readonly style="text-transform: capitalize;">
+                </div>
+                <div class="form-group">
+                    <label for="category"><i class="icofont icofont">Category</i></label>
+                    <input type="text" class="form-control" id="category" name="category" value="{{category.category_name}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="score"><i class="icofont icofont">Score&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></label>
+                    <input type="text" class="form-control" id="score" name="score" value="{{attempt.score}}" readonly>
+                </div>
+            </div>
+            
+    
+              <thead>
+                <tr>
+                    <th>Slno</th>
+                    <th>Questions</th>
+                    <th>Option 1</th>
+                    <th>Option 2</th>
+                    <th>Option 3</th>
+                    <th>Answer</th>
+                    <th>Your Answer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in details %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ result.question }}</td>
+                    <td>{{ result.option1 }}</td>
+                    <td>{{ result.option2 }}</td>
+                    <td>{{ result.option3 }}</td>
+                    <td>{{ result.correct_answer }}</td>
+                    <td>{{ result.user_answer }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">No results found for this attempt.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+          <!-- <table>
+            <thead>
+                <tr>
+                    <th>Slno</th>
+                    <th>Questions</th>
+                    <th>Option 1</th>
+                    <th>Option 2</th>
+                    <th>Option 3</th>
+                    <th>Answer</th>
+                    <th>Your Answer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in details %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ result.question }}</td>
+                    <td>{{ result.option1 }}</td>
+                    <td>{{ result.option2 }}</td>
+                    <td>{{ result.option3 }}</td>
+                    <td>{{ result.correct_answer }}</td>
+                    <td>{{ result.user_answer }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">No results found for this attempt.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> -->
+   
+
+   
+    <script>
+        window.onload = function() {
+            const rows = document.querySelectorAll('tbody tr'); 
+
+            rows.forEach(row => {
+                const correctAnswer = row.cells[5].innerText.trim(); 
+                const userAnswer = row.cells[6].innerText.trim(); 
+
+                if (correctAnswer === userAnswer) {
+                   
+                    row.classList.add('correct-answer');
+                }
+            });
+        };
+    </script>
+</body>
+</html>

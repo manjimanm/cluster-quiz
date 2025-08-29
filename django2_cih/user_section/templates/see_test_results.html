@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>See The Results</title>
+    
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .tab-container {
+            display: flex;
+            justify-content: space-around;
+            background-color: #92bce3;
+            color: rgb(16, 14, 14);
+        }
+        .tab {
+            padding: 14px 20px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .tab:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .tab.active {
+            background-color: #22a0df;
+            color: white;
+        }
+
+        /* Tab Content Styling */
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Responsive Table */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        table {
+            width: 80%;
+          border-collapse: collapse;
+          margin: 0 auto;
+           
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #bcdcf7;
+        }
+        th {
+            background-color: #367cbc;
+        }
+        tr:nth-child(even) {
+            background-color: #e1eaef;
+        }
+
+        @media screen and (max-width: 600px) {
+            table {
+                border: 0;
+            }
+            table thead {
+                display: none;
+            }
+            table tr {
+                display: block;
+                margin-bottom: 10px;
+            }
+            table td {
+                display: block;
+                text-align: right;
+                padding: 10px;
+                position: relative;
+            }
+            table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                top: 10px;
+                font-weight: bold;
+            }
+        }
+
+        tbody {
+  tr {
+    &:hover {
+      background-color: rgba(19, 163, 189, 0.3);
+    }
+  }
+}
+
+.update_btn {
+      height: 40px;
+      width: 100px;
+      font-size: 15px;
+      background-color: #22a0df;
+      border-radius: .2rem;
+      
+    }
+
+  </style>
+</head>
+<body>
+<header>
+    {% include 'navbar.html' %}
+</header>
+
+<div class="tab-container">
+    <div class="tab active" onclick="openTab(event, 'tab1')">Practice Session Results</div>
+    <div class="tab" onclick="openTab(event, 'tab2')">Mock Test Results</div>
+    <div class="tab" onclick="openTab(event, 'tab3')">Crown Assessment Results</div>
+</div>
+
+<div id="tab1" class="tab-content active">
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Slno</th>
+                    <th>Name</th> 
+                    <th>Category</th>
+                    <th>Score</th>
+                    <!-- <th>Added Id</th> -->
+                    <th>Attempt Id</th>
+                    <th>View Details</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for attempt in demo_tests %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td style="text-transform: capitalize;">{{ user.name }}</td>
+                    <td style="text-transform: capitalize;">{{ category_name}}</td>
+                    <td>{{ attempt.score }}</td>
+                    <!-- <td>{{ attempt.add_id}}</td> -->
+                    <td>{{ attempt.id }}</td>
+                    <td>
+                        <button class="update_btn" style="height: 40px; width: 100px;">
+                            <a  href="{% url 'results_details' attempt.id %}">View Details</a>
+                        </button>
+                    </td>
+                      
+                {% empty %}
+                <tr>
+                    <td colspan="5">No Test Results Found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="tab2" class="tab-content">
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Slno</th>
+                    <th>Name</th> 
+                    <th>Category</th>
+                    <th>Score</th>
+                    <!-- <th>Added Id</th> -->
+                    <th>Attempt Id</th>
+                    <th>View Details</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for attempt in mock_tests %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td style="text-transform: capitalize;">{{ user.name }}</td>
+                    <td style="text-transform: capitalize;">{{ category_name}}</td>
+                    <td>{{ attempt.score }}</td>
+                    <!-- <td>{{ attempt.add_id}}</td> -->
+                    <td>{{ attempt.id }}</td>
+                    <td>
+                        <button class="update_btn" style="height: 40px; width: 100px;">
+                            <a  href="{% url 'results_details' attempt.id %}">View Details</a>
+                        </button>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No Test Results Found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="tab3" class="tab-content">
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Slno</th>
+                    <th>Name</th> 
+                    <th>Category</th>
+                    <th>Score</th>
+                    <!-- <th>Added Id</th> -->
+                    <th>Attempt Id</th>
+                    <th>View Details</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for attempt in aptitude_tests %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td style="text-transform: capitalize;">{{ user.name }}</td>
+                    <td style="text-transform: capitalize;">{{ category_name}}</td>
+                    <td>{{ attempt.score }}</td>
+                    <!-- <td>{{ attempt.add_id}}</td> -->
+                    <td>{{ attempt.id }}</td>
+                    <td>
+                        <button class="update_btn" style="height: 40px; width: 100px;">
+                            <a  href="{% url 'assessment_details' attempt.id %}">View Details</a>
+                        </button>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No Test Results Found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function openTab(event, tabName) {
+        // Hide all tabs
+        var contents = document.querySelectorAll('.tab-content');
+        contents.forEach(function(content) {
+            content.classList.remove('active');
+        });
+
+        // Remove active class from all tabs
+        var tabs = document.querySelectorAll('.tab');
+        tabs.forEach(function(tab) {
+            tab.classList.remove('active');
+        });
+
+        // Show the current tab
+        document.getElementById(tabName).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
