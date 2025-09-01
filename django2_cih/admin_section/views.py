@@ -13,9 +13,16 @@ from django.contrib.auth import logout
 from django.core.paginator import Paginator
 # Create your views here.
 
+# def header(request):
+#     permissions = request.session.get('permissions', [])
+#     return render(request,'header.html',{'permissions': permissions})
 def header(request):
     permissions = request.session.get('permissions', [])
-    return render(request,'header.html',{'permissions': permissions})
+
+    # Sort alphabetically by name (case-insensitive)
+    permissions = sorted(permissions, key=lambda x: x['name'].lower())
+
+    return render(request, 'header.html', {'permissions': permissions})
 def index(request):
     uid = request.session.get('uid')
 
@@ -36,6 +43,7 @@ def index(request):
                 for permission in role_permissions
             ]
 
+            permissions = sorted(permissions, key=lambda x: x['name'].lower())
             context = {
                 'user': user,
                 'permissions': permissions,
@@ -70,6 +78,7 @@ def newcategory(request):
     category_to_edit = None
 
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
     if request.method == 'POST':
         cat_name = request.POST.get('categoryname')
@@ -119,6 +128,7 @@ def newquiz(request):
     categories = category.objects.all()
     subcategories = subcategory.objects.all()
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
     if request.method == 'POST':
         cat_id = request.POST.get('categoryname')
@@ -172,22 +182,7 @@ def get_subcategories(request):
     return JsonResponse({'subcategories': subcategories_data})
 
 
-# def newviewquiz(request):
-#     category_id = request.GET.get('categoryname', '')  
-#     getq = questions.objects.select_related('category').exclude(verify_status=0)
 
-#     permissions = request.session.get('permissions', []) 
-#     if category_id:
-#         getq = getq.filter(category_id=category_id)  
-
-#     categories = category.objects.all()  
-    
-#     return render(request, 'newviewquiz.html', {
-#         'quizz': getq,
-#         'categories': categories,
-#         'selected_category': category_id,
-#         'permissions': permissions
-#     })
 
 
 def newviewquiz(request):
@@ -196,6 +191,7 @@ def newviewquiz(request):
     current_page = request.GET.get('page', 1)
 
     permissions = request.session.get('permissions', []) 
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
     if category_id:
         getq = getq.filter(category_id=category_id)  
 
@@ -220,78 +216,6 @@ def deletequiz(request,id):
     delquiz=questions.objects.get(id=id)
     delquiz.delete()
     return HttpResponseRedirect(reverse('newviewquiz')) 
-
-
-
-
-# def newupdatequiz(request, id):
-#     uid = request.session.get('uid')
-#     user = super_users.objects.get(id=uid)
-
-#     categories = category.objects.all()
-#     quiz1 = questions.objects.get(id=id)
-
-#     subcategories = subcategory.objects.filter(categories=quiz1.category)
-#     question_subcategory = quiz1.subcategory 
-
-#     current_page = request.GET.get('page', 1)  
-
-#     if request.method == 'POST':
-#         qcat = request.POST.get('categoryname')
-#         try:
-#             selected_category = category.objects.get(id=qcat)
-#         except category.DoesNotExist:
-#             return render(request, 'newupdatequiz.html', {
-#                 'q_id': quiz1,
-#                 'categories': categories,
-#                 'error': "Selected category does not exist."
-#             })
-#         subc_id = request.POST.get('subcategory')  
-#         try:
-#             selected_subcategory = subcategory.objects.get(id=subc_id)  
-#         except subcategory.DoesNotExist:
-#             return render(request, 'newupdatequiz.html', {
-#                 'q_id': quiz1,
-#                 'categories': categories,
-#                 'error': "Selected subcategory does not exist."
-#             })
-#         addque = request.POST.get('question')
-#         opt1 = request.POST.get('option1')
-#         opt2 = request.POST.get('option2')
-#         opt3 = request.POST.get('option3')
-#         correctans = request.POST.get('correctAnswer')
-#         updatedby = request.POST.get('updatedby')
-
-        
-#         quiz1.category = selected_category
-#         quiz1.subcategory = selected_subcategory 
-#         quiz1.question = addque
-#         quiz1.option1 = opt1
-#         quiz1.option2 = opt2
-#         quiz1.option3 = opt3
-#         quiz1.answer = correctans
-        
-#         quiz1.save()
-
-#         quizedit = quizedits(
-#             q_no=quiz1, 
-#             updatedby=user.id, 
-#             added_on=timezone.now(),
-#         )
-#         quizedit.save()
-
-#         messages.success(request, f'Question updated successfully.')
-#         return redirect('newviewquiz')
-        
-#     return render(request, 'newupdatequiz.html', {
-#         'q_id': quiz1,
-#         'categories': categories,
-#         'subcategories': subcategories, 
-#         'user': user,
-#         'question_subcategory': question_subcategory
-#     })
-
-
 
 
 def newupdatequiz(request, id):
@@ -387,6 +311,7 @@ def check_email(request):
 def register_users(request):
     categories = category.objects.all()  
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
     if request.method == "POST":
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -420,6 +345,7 @@ def viewregister(request):
     to_date = request.GET.get('to_date')
     no_results = False
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
     if from_date and to_date:
         from_date = timezone.datetime.strptime(from_date, '%Y-%m-%d')
@@ -503,7 +429,7 @@ def login(request):
 def profile(request):
     uid = request.session.get('uid')
     permissions = request.session.get('permissions', [])
-
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
     
     if uid:
         user = get_object_or_404(super_users, id=uid) 
@@ -528,7 +454,7 @@ def schedule_exam(request):
     users = registuser.objects.all()  
     categories = category.objects.all()
     permissions = request.session.get('permissions', [])
-  
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
     
 
     if request.method == 'POST':
@@ -627,7 +553,7 @@ def submit_selected_questions(request):
 def attempted_quiz(request, user_id):
     user= registuser.objects.get(id=user_id)
     permissions = request.session.get('permissions', [])
-
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
     category_name=user.categoryd.category_name
     
@@ -721,9 +647,11 @@ def attempted_result(request, attempt_id):
 
 
 def permissions(request):
-    per_details = permission.objects.all()
+    # per_details = permission.objects.all()
+    per_details = permission.objects.all().order_by('permissions')
     permissions_to_edit = None 
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
    
     if request.method == 'POST':
@@ -778,6 +706,7 @@ def roles(request):
         permiss = request.POST.getlist('permissions') 
   
         permissions = request.session.get('permissions', [])
+        permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
         if not role_name_instance or not permiss:
             messages.error(request, 'Role name and permissions are required.')
@@ -797,6 +726,7 @@ def roles(request):
         return redirect('roles')
 
     permissions = request.session.get('permissions', [])  
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
     return render(request, 'role.html', {
         'permissions1': permissions1,
@@ -807,7 +737,7 @@ def view_roles(request):
     roles = role.objects.all()
     role_permissions = []
     permissions = request.session.get('permissions', [])
-
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
     for r in roles:
     
@@ -875,6 +805,7 @@ def super_check_email(request):
 def superusers(request):
     roled = role.objects.all()  
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
     if request.method == "POST":
         name = request.POST.get('name')
@@ -906,6 +837,7 @@ def superusers(request):
 
 def organisations(request):
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
     role_filter = request.GET.get('role', None)
 
@@ -931,6 +863,7 @@ def organisations(request):
 
 def view_superusers(request):
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
     role_filter = request.GET.get('role', None)
 
@@ -1015,31 +948,6 @@ def delete_organisations(request,id):
     return redirect('organisations')
 
  
-# def verify_quiz(request):
-#     uid = request.session.get('uid')
-#     user = super_users.objects.get(id=uid)
-#     selected_category_id = request.GET.get('categoryname', None)
-#     permissions = request.session.get('permissions', [])
-    
-    
-#     if selected_category_id:
-#         quizz = questions.objects.filter(verify_status=0, category_id=selected_category_id)
-#         selected_category = category.objects.get(id=selected_category_id)
-#     else:
-#         quizz = questions.objects.filter(verify_status=0)
-#         selected_category = None
-
-#     categories = category.objects.all()
-
-    
-
-#     return render(request, 'verify_quiz.html', {
-#         'quizz': quizz,
-#         'categories': categories,
-#         'selected_category': selected_category,
-#         'permissions': permissions,
-#         'user':user
-#     })
 
 
 
@@ -1048,6 +956,7 @@ def verify_quiz(request):
     user = super_users.objects.get(id=uid)
     selected_category_id = request.GET.get('categoryname', None)
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
     # Filter the questions based on the selected category
     if selected_category_id:
@@ -1101,8 +1010,6 @@ def verify_delete(request,id):
     delquiz.delete()
     messages.success(request, f'Question deleted successfully.')
     return HttpResponseRedirect(reverse('verify_quiz')) 
-
-
 
 
 def verify_update(request, id):
@@ -1195,6 +1102,7 @@ def get_subcategories_by_category(request):
 def subcategories(request):
     categories1 = category.objects.all()  
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
     if request.method == "POST":
         ucategory = request.POST.get('category') 
         subc = request.POST.get('subcategory') 
@@ -1216,6 +1124,7 @@ def subcategories(request):
    
 def view_subcategory(request):
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
     categories = category.objects.all()
 
   
@@ -1313,6 +1222,7 @@ def create_exam(request):
     user = super_users.objects.get(id=uid)
     categories = category.objects.all()
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
 
     employer_role = role.objects.get(role_name="Employer")
 
@@ -1407,7 +1317,7 @@ def create_questions(request, exam_id):
 
 def view_exams(request):
     permissions = request.session.get('permissions', [])
-
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
     catid = category.objects.all()
 
     selected_category_id = request.GET.get('categoryname')
@@ -1465,6 +1375,7 @@ def delete_exam(request,id):
 
 def view_applied_exams(request):
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
     categories = category.objects.all()
     e_ids = create_examid.objects.all()
 
@@ -1512,53 +1423,9 @@ def view_applied_exams(request):
 
 
 
-# def view_applied_exams(request):
-#     permissions = request.session.get('permissions', [])
-#     categories = category.objects.all()
-#     e_ids = create_examid.objects.all()
-
-#     # Get the selected category from the GET request
-#     selected_category_id = request.GET.get('categoryname')
-
-#     if selected_category_id:
-#         # Get the selected category object
-#         selected_category = category.objects.get(id=selected_category_id)
-        
-#         # Filter exam_apply entries based on the category of the associated user
-#         # We're using Q objects to filter by category_name in the registuser table
-#         getapplied = exam_apply.objects.filter(
-#             userid__in=registuser.objects.filter(
-#                 categoryd=selected_category
-#             ).values('id'),
-#             status=0
-#         )
-#     else:
-#         # If no category is selected, show all exam applications
-#         getapplied = exam_apply.objects.filter(status=0)
-#         selected_category = None
-
-#     # Add user-related information to the applied exams
-#     for application in getapplied:
-#         try:
-#             user = registuser.objects.get(id=application.userid)
-#             application.user_name = user.name
-#             application.user_category = user.categoryd.category_name
-#         except registuser.DoesNotExist:
-#             application.user_name = None
-#             application.user_category = None
-
-#     # Render the template with the necessary context
-#     return render(request, 'view_applied_exams.html', {
-#         'get_applied': getapplied,
-#         'permissions': permissions,
-#         'categories': categories,
-#         'selected_category': selected_category,
-#         'eids':e_ids
-#     })
-
-
 def already_scheduled(request):
     permissions = request.session.get('permissions', [])
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
     categories = category.objects.all()
 
     # Get the selected category from the GET request
@@ -1656,6 +1523,7 @@ def my_questions(request):
     getq =questions.objects.filter(added_by=uid)
 
     permissions = request.session.get('permissions', []) 
+    permissions = sorted(permissions, key=lambda x: x['name'].lower()) if permissions else []
     if category_id:
         getq = getq.filter(category_id=category_id)  
 
@@ -1667,61 +1535,6 @@ def my_questions(request):
         'selected_category': category_id,
         'permissions': permissions
     })
-
-
-
-
-
-# def exam_time_slot(request):
-#     permissions = request.session.get('permissions', [])
-#     categories = category.objects.all()
-#     e_ids = create_examid.objects.all()
-
-#     # Get the selected category from the GET request
-#     selected_category_id = request.GET.get('categoryname')
-#     exam_id_filter = request.GET.get('exam_id', '')  # Get the exam_id filter value
-
-#     # If a category is selected
-#     if selected_category_id:
-#         selected_category = category.objects.get(id=selected_category_id)
-#         getapplied = exam_apply.objects.filter(
-#             userid__in=registuser.objects.filter(
-#                 categoryd=selected_category
-#             ).values('id'),
-#             status=0
-#         )
-#     else:
-#         # If no category is selected, show all exam applications
-#         getapplied = exam_apply.objects.filter(status=0)
-#         selected_category = None
-
-#     # Apply exam_id filter if it is provided
-#     if exam_id_filter:
-#         getapplied = getapplied.filter(exam_id__icontains=exam_id_filter)  # Perform partial matching on exam_id
-
-#     # Add user-related information to the applied exams
-#     for application in getapplied:
-#         try:
-#             user = registuser.objects.get(id=application.userid)
-#             application.user_name = user.name
-#             application.user_category = user.categoryd.category_name
-#         except registuser.DoesNotExist:
-#             application.user_name = None
-#             application.user_category = None 
-
-
-
-
-#     # Render the template with the necessary context
-#     return render(request, 'exam_time_slot.html', {
-#         'get_applied': getapplied,
-#         'permissions': permissions,
-#         'categories': categories,
-#         'selected_category': selected_category,
-#         'eids': e_ids,
-#         'exam_id_filter': exam_id_filter  
-#     })     
-
 
 
 

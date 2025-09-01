@@ -18,40 +18,10 @@ import base64
 
 # Create your views here.
 
-#home page
-# def u_index(request):
-#     if 'uid' in request.session:
-#         user_id = request.session['uid']
-#         try:
-#             user = registuser.objects.get(id=user_id)
-#             selected_category = user.categoryd.id 
-#         except registuser.DoesNotExist:
-#             selected_category = ""
-#     else:
-#         selected_category = "" 
-
-#     return render(request, 'uindex.html', {'selected_category': selected_category})
-# def u_index(request):
-#     if 'uid' in request.session:
-#         user_id = request.session['uid']
-#         try:
-#             user = registuser.objects.get(id=user_id)
-#             category_name = user.categoryd.id
-#         except registuser.DoesNotExist:
-#             user = None
-#             category_name = ""
-#     else:
-#         user = None
-#         category_name = ""
-        
-   
-#     context = {'user': user, 'category_name': category_name}
-    
-#     return render(request, 'uindex.html', context)
 
 def navbar(request):
-    if 'uid' in request.session:
-        user_id = request.session['uid']
+    if 'user_uid' in request.session:
+        user_id = request.session['user_uid']
         try:
             user = registuser.objects.get(id=user_id)
             category_name = user.categoryd.id
@@ -113,11 +83,11 @@ def newregister(request):
 
 #demo test
 def questionare(request):
-    uid = request.session.get('uid') 
+    user_uid = request.session.get('user_uid') 
     selected_category = None  
     user = None  
-    if uid:
-        user = get_object_or_404(registuser, id=uid) 
+    if user_uid:
+        user = get_object_or_404(registuser, id=user_uid) 
        
         if hasattr(user, 'categoryd') and user.categoryd:
             selected_category = user.categoryd.id
@@ -130,8 +100,8 @@ def questionare(request):
         print(random_questions)
 
     if request.method == "POST":
-        uid = request.POST.get('uid')
-        print("User ID from POST:", uid)
+        user_uid = request.POST.get('uiuser_uidd')
+        print("User ID from POST:", user_uid)
         
         selected_category=request.POST.get('category_name')
         print(selected_category)
@@ -139,7 +109,7 @@ def questionare(request):
         score = request.POST.get('score')
         
         attempts = attempt.objects.create(
-            user_id=uid, 
+            user_id=user_uid, 
             category=selected_category,
             add_id=aid,
             score=score
@@ -164,7 +134,7 @@ def questionare(request):
     context = {
         'questions': random_questions,
         'selected_category': selected_category,
-        'uid': uid,
+        'uid': user_uid,
         'user': user,
     }
     return render(request, 'questionare.html', context)  
@@ -173,9 +143,9 @@ def questionare(request):
 
 
 def results(request, score):
-    uid = request.session.get('uid')
+    user_uid = request.session.get('user_uid')
     
-    latest_attempt = attempt.objects.filter(user_id=uid).order_by('-id').first()
+    latest_attempt = attempt.objects.filter(user_id=user_uid).order_by('-id').first()
 
     attempt_results = attemptresult.objects.filter(attempt=latest_attempt)
 
@@ -204,19 +174,19 @@ def results(request, score):
 
 #mocktest
 def exam(request):
-    uid = request.session.get('uid')
+    user_uid = request.session.get('user_uid')
     selected_category = None
     user = None
 
-    if uid:
-        user = get_object_or_404(registuser, id=uid)
+    if user_uid:
+        user = get_object_or_404(registuser, id=user_uid)
         user_name = user.name
 
         if hasattr(user, 'categoryd') and user.categoryd:
             selected_category = user.categoryd.id
 
     if selected_category:
-        existing_attempt = attempt.objects.filter(user_id=uid, category=selected_category,add_id=2).first()
+        existing_attempt = attempt.objects.filter(user_id=user_uid, category=selected_category,add_id=2).first()
         if existing_attempt:
             return render(request, 'already_attempted.html')
 
@@ -228,8 +198,8 @@ def exam(request):
 
     if request.method == "POST":
    
-        uid = request.POST.get('uid')
-        print("User ID from POST:", uid)
+        user_uid = request.POST.get('user_uid')
+        print("User ID from POST:", user_uid)
 
         selected_category = request.POST.get('category_name')
         print(selected_category)
@@ -238,7 +208,7 @@ def exam(request):
 
    
         attempts = attempt.objects.create(
-            user_id=uid,
+            user_id=user_uid,
             category=selected_category,
             add_id=aid,
             score=score
@@ -264,7 +234,7 @@ def exam(request):
     context = {
         'questions': random_questions,
         'selected_category': selected_category,
-        'uid': uid,
+        'uid': user_uid,
         'user': user,
     }
 
@@ -276,12 +246,12 @@ def exam(request):
 
 #aptitude test
 def aptitude_test(request):
-    uid = request.session.get('uid')
-    users = get_object_or_404(registuser, id=uid)
-    if not uid:
+    user_uid = request.session.get('user_uid')
+    users = get_object_or_404(registuser, id=user_uid)
+    if not user_uid:
         return redirect('ulogin')
 
-    user_instance = get_object_or_404(registuser, id=uid)
+    user_instance = get_object_or_404(registuser, id=user_uid)
 
    
     latest_add_exam_instance = add_exam.objects.filter(userd=user_instance).order_by('-id').first()
@@ -308,7 +278,7 @@ def aptitude_test(request):
     context = {
         'questions': questions_list,
         'selected_category': user_instance.categoryd,
-        'uid': uid,
+        'uid': user_uid,
         'uname': user_instance.name,
         'add': latest_add_exam_instance,
         'user':users
@@ -323,7 +293,7 @@ def aptitude_test(request):
             return render(request, 'home.html', context)
 
         attempts = attempt.objects.create(
-            user_id=uid,
+            user_id=user_uid,
             category=selected_category,
             add_id=aid,
             score=score
@@ -449,20 +419,20 @@ def assessment_details(request, attempt_id):
 
 
 def test(request):
-    uid = request.session.get('uid')
+    user_uid = request.session.get('user_uid')
     selected_category = None
     user = None
     # aid  = 1
 
-    if uid:
-        user = get_object_or_404(registuser, id=uid)
+    if user_uid:
+        user = get_object_or_404(registuser, id=user_uid)
 
         if hasattr(user, 'categoryd') and user.categoryd:
             selected_category = user.categoryd.id
 
     if selected_category:
         # Check if the user has already attempted the test in this category
-        existing_attempt = attempt.objects.filter(user_id=uid, category=selected_category,add_id=1).first()
+        existing_attempt = attempt.objects.filter(user_id=user_uid, category=selected_category,add_id=1).first()
         if existing_attempt:
             # If an attempt exists, redirect to 'no_exam.html'
             return render(request, 'already_attempted.html')# Make sure you have a URL for 'no_exam'
@@ -476,8 +446,8 @@ def test(request):
 
     if request.method == "POST":
         # Handle form submission
-        uid = request.POST.get('uid')
-        print("User ID from POST:", uid)
+        user_uid = request.POST.get('user_uid')
+        print("User ID from POST:", user_uid)
 
         selected_category = request.POST.get('category_name')
         print(selected_category)
@@ -486,7 +456,7 @@ def test(request):
 
         # Create a new attempt record for the user
         attempts = attempt.objects.create(
-            user_id=uid,
+            user_id=user_uid,
             category=selected_category,
             add_id=aid,
             score=score
@@ -512,7 +482,7 @@ def test(request):
     context = {
         'questions': random_questions,
         'selected_category': selected_category,
-        'uid': uid,
+        'uid': user_uid,
         'user': user,
     }
 
@@ -522,9 +492,14 @@ def test(request):
 
 
 
+# def logout_view(request):
+#     logout(request)  
+#     return redirect('/')  
 def logout_view(request):
-    logout(request)  
-    return redirect('/')  
+    if 'user_uid' in request.session:
+        del request.session['user_uid']
+    return redirect('/')
+
 
 
 
@@ -536,7 +511,7 @@ def ulogin(request):
         try:
            
             user = registuser.objects.get(email=username, password=password)
-            request.session['uid'] = user.id
+            request.session['user_uid'] = user.id
 
             next_url = request.GET.get('next', 'home')
 
@@ -551,13 +526,13 @@ def ulogin(request):
 
 
 def home(request):
-    exams = create_examid.objects.all().distinct()# Get all exams from CreateExamid
+    exams = create_examid.objects.all().distinct()
     
     user = None
     category_name = "No category"
 
-    if 'uid' in request.session:
-        user_id = request.session['uid']
+    if 'user_uid' in request.session:
+        user_id = request.session['user_uid']
         try:
             user = registuser.objects.get(id=user_id)
 
@@ -566,15 +541,7 @@ def home(request):
             else:
                 category_name = "No category"
             
-            # Fetch the assigned exam for the user
-            # assigned_exam = exam_apply.objects.filter(userid=user.id, status__gt=0).first()  # status > 0 means assigned exam
-            
-            # # If an assigned exam exists, fetch the exam details
-            # if assigned_exam:
-            #     assigned_exam_id = assigned_exam.exam_id  # Get the assigned exam
-            #     exam = create_examid.objects.get(id=assigned_exam_id)
-            # else:
-            #     exam = None
+           
 
         except registuser.DoesNotExist:
             user = None
@@ -640,12 +607,12 @@ def exam_invite(request, encoded_exam_id):
     exam = get_object_or_404(create_examid, id=exam_id)
 
     # Retrieve the user from the session
-    uid = request.session.get('uid')
-    if not uid:
+    user_uid = request.session.get('user_uid')
+    if not user_uid:
         messages.error(request, "You need to log in first.")
         return redirect(f"/?next={request.path}")  
 
-    user = get_object_or_404(registuser, id=uid)
+    user = get_object_or_404(registuser, id=user_uid)
 
     # Retrieve the exam from the database using the decoded exam ID
     # exam = get_object_or_404(create_examid, id=exam_id)
@@ -686,12 +653,12 @@ def exam_invite(request, encoded_exam_id):
 
 def assigned_exam(request, exam_id):
     # Ensure user is logged in
-    uid = request.session.get('uid')
-    if not uid:
+    user_uid = request.session.get('user_uid')
+    if not user_uid:
         messages.error(request, "You need to log in first.")
         return redirect(f"/?next={request.path}")  
 
-    user = get_object_or_404(registuser, id=uid)
+    user = get_object_or_404(registuser, id=user_uid)
     print(f"User ID: {user.id}")  # Debugging line
 
     # Ensure user has applied for the exam
@@ -874,13 +841,13 @@ def convert_to_duration(time_str):
 
 
 def assessment(request):
-    uid = request.session.get('uid')
+    user_uid = request.session.get('user_uid')
     
-    if not uid:
+    if not user_uid:
         messages.error(request, "You need to log in first.")
         return redirect(f"/?next={request.path}")  
     
-    user = get_object_or_404(registuser, id=uid)
+    user = get_object_or_404(registuser, id=user_uid)
     
     # Retrieve the latest exam application for this user (most recent application)
     latest_exam_application = exam_apply.objects.filter(userid=user.id).order_by('-applied_time').first()
@@ -945,7 +912,7 @@ def assessment(request):
 
                     # Create the entry in the 'assigned_attempt' table first
                     attempt = assigned_attempt.objects.create(
-                        user_id=uid,
+                        user_id=user_uid,
                         examid=assigned_exam.examid,  # Corrected this line
                         score=score,  # Store the score from the input field
                         application_id=latest_exam_application.id,
@@ -991,30 +958,6 @@ def assessment(request):
 
 
 
-
-
-
-# def exam_not_yet_started(request, set_date, set_time):
-#     # Convert string inputs for set_date and set_time to datetime objects
-#     set_date_obj = datetime.strptime(set_date, "%Y-%m-%d").date()
-#     set_time_obj = datetime.strptime(set_time, "%H:%M:%S").time()
-#     scheduled_datetime = datetime.combine(set_date_obj, set_time_obj)
-
-#     current_datetime = timezone.now()
-
-
-#     if current_datetime < scheduled_datetime:
-#         context = {
-#             'set_date': set_date_obj,
-#             'set_time': set_time_obj,
-#         }
-#         return render(request, 'exam_not_yet_started.html', context)
-#     else:
-#         return redirect('exam_in_progress')
-    
-
-
-
 def exam_already_ended(request, set_date, set_time, allowed_time_str):
     # Convert string inputs for set_date and set_time to datetime objects
     set_date_obj = datetime.strptime(set_date, "%Y-%m-%d").date()
@@ -1041,13 +984,13 @@ def exam_already_ended(request, set_date, set_time, allowed_time_str):
 
 
 def planned_exam(request):
-    uid = request.session.get('uid')
+    user_uid = request.session.get('user_uid')
     
-    if not uid:
+    if not user_uid:
         messages.error(request, "You need to log in first.")
         return redirect(f"/?next={request.path}")  
     
-    user = get_object_or_404(registuser, id=uid)
+    user = get_object_or_404(registuser, id=user_uid)
 
     latest_exam_application = exam_apply.objects.filter(userid=user.id).order_by('-applied_time').first()
     print(f"apply id:{latest_exam_application}")
@@ -1123,7 +1066,7 @@ def planned_exam(request):
                     
                     # Save each selected question in the 'save_questions' table
                     save_quiz = save_questions.objects.create(
-                        userid=uid,
+                        userid=user_uid,
                         applicationid=latest_exam_application,  # Use the id, not the object
                         question_id=i.id
                     )
@@ -1140,7 +1083,7 @@ def planned_exam(request):
 
                     # Create the entry in the 'assigned_attempt' table first
                     attempt = assigned_attempt.objects.create(
-                        user_id=uid,
+                        user_id=user_uid,
                         examid=assigned_exam.examid,  # Corrected this line
                         score=score,  # Store the score from the input field
                         application_id=latest_exam_application.id,

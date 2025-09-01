@@ -1149,11 +1149,11 @@
                                             </div>
                                         </div>
 
-<div class="fixed-button">
+<!-- <div class="fixed-button">
 	<a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank" class="btn btn-md btn-primary">
 	  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
 	</a>
-</div>
+</div> -->
                                         <!-- Warning Section Starts -->
                                         <!-- Older IE warning message -->
 <!--[if lt IE 9]>
@@ -1217,7 +1217,7 @@
 <script src="{% static 'assets/js/demo-12.js' %}"></script>
 <script src="{% static 'assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
 
-<script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
        
         var questionCount = parseInt(document.getElementById('question_count').value);
@@ -1234,6 +1234,36 @@
             }
         });
     });
+</script> -->
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var questionCount = parseInt(document.getElementById('question_count').value);
+    var checkboxes = document.querySelectorAll('.question-checkbox');
+
+    // Prevent selecting more than questionCount
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            var selectedQuestions = document.querySelectorAll('.question-checkbox:checked').length;
+
+            if (selectedQuestions > questionCount) {
+                this.checked = false; // Uncheck the extra one
+                alert('You can only select ' + questionCount + ' questions.');
+            }
+        });
+    });
+
+    // Form submission validation
+    document.getElementById('quizzerForm').addEventListener('submit', function(event) {
+        var selectedQuestions = document.querySelectorAll('.question-checkbox:checked').length;
+
+        if (selectedQuestions < questionCount) {
+            event.preventDefault();  // Stop form submission
+            alert('You must select exactly ' + questionCount + ' questions. You selected ' + selectedQuestions + '.');
+        }
+    });
+});
 </script>
 
 
